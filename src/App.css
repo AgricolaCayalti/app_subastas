@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 .login-background {
-  background-image: url('/src/assets/background-login.png');
+  background-image: url('/src/assets/background-main.png');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 

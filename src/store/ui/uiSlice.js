@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Cadenas from "../../data/cadenas";
+import Cadenas from "../../data/cadenas.ts";
 import { loadStorage, saveStorage} from "@/assets/localStorager.js";
 const SESSION_LANG_NAME = import.meta.env.VITE_SESSION_LANG_NAME;
 

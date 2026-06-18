@@ -10,4 +10,5 @@ export * from './LinearLoader/LinearLoader';
 export * from './ProfileButton/ProfileButton';
 export * from './Space/Space';
 export * from './RequireAuth';
+export * from './Switch/Switch';
 export * from './CircularLoader/CircularLoader.jsx'

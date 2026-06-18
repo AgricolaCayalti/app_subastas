@@ -1,0 +1,55 @@
+{
+    "compilerOptions": {
+        /* ----- Lenguaje y Entorno ----- */
+        "target": "ES2020", // Usa lo último de JavaScript moderno
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ], // APIs del navegador y ES2020
+        "jsx": "react-jsx", // Modo React 17+ (no necesita import React)
+        "useDefineForClassFields": true, // Estándar para clases modernas
+        /* ----- Módulos ----- */
+        "module": "ESNext", // Usa módulos ESNext
+        "moduleResolution": "node", // Resuelve módulos como Node.js
+        "resolveJsonModule": true, // Permite importar .json
+        "esModuleInterop": true, // Mejor compatibilidad con CommonJS
+        "allowSyntheticDefaultImports": true, // Permite imports por defecto
+        /* ----- Emisión (Salida) ----- */
+        "noEmit": true, // No genera archivos .js (lo hace el bundler)
+        "isolatedModules": true, // Obligatorio para bundlers modernos
+        /* ----- ¿JavaScript y TypeScript juntos? ¡Sí! ----- */
+        "allowJs": true, // <--- PERMITE importar archivos .js / .jsx
+        "checkJs": false, // <--- (Opcional) Lo pongo en false para no revisar JS estrictamente
+        /* ----- Reglas estrictas (recomendado) ----- */
+        "strict": true, // Habilita todo el chequeo estricto
+        "noUnusedLocals": true, // Detecta variables locales sin usar
+        "noUnusedParameters": true, // Detecta parámetros sin usar
+        "noFallthroughCasesInSwitch": true, // Evita fall-through en switches
+        "forceConsistentCasingInFileNames": true, // Evita errores de mayúsculas/minúsculas en imports
+        "types": [
+            "vite/client"
+        ],
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        }
+        /* (OPCIONAL) ----- Alias para imports (ej: @/components) ----- */
+        // "baseUrl": ".",
+        // "paths": {
+        //   "@/*": ["src/*"]
+        // }
+    },
+    /* ----- Qué archivos incluir ----- */
+    "include": [
+        "src"
+    ],
+    /* ----- Qué archivos excluir ----- */
+    "exclude": [
+        "node_modules",
+        "build",
+        "dist",
+        "coverage"
+    ]
+}

@@ -1,0 +1,101 @@
+:root {
+  --primary: #183A21;
+  --secondary: #018737;
+  --terciary: #BF5708;
+  --gray: #757575;
+  --lighgray: #E6E6E6;
+  --extra : #624012;
+  --black: #000;
+  --semiblack: #2A2D3A;
+  --white: white;
+  --error: #ff0000;
+  --lighterror: #ffc8c8;
+
+  line-height: 1.5;
+  
+  user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-family: Montserrat;
+}
+
+.background-gray{
+  background-repeat: no-repeat;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+}
+
+.background-imglogin{
+  background-image: url('./assets/background-login.png');
+}
+
+.background-imgmain{
+  background-image: url('./assets/background-main.png');
+}
+
+html {
+  height: 100%;
+}
+
+body{
+  margin: 0px;
+  height: 100%;
+}
+
+#root{
+  height: 100%;
+}
+
+.lbl-link{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--link);
+  cursor: pointer;
+}
+
+.page-title{
+  margin: 0px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--terciary);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.text-left{
+  text-align: left !important;
+}
+
+
+button{
+  font-family: Montserrat;
+}
+
+.blk-error{
+  color: var(--error);
+  color: var(--error);
+  background: var(--lighterror);
+  padding: 1em 0.5em;
+  padding-left: 1.15em;
+  border-left: 10px solid var(--error);
+  text-align: justify;
+  margin: 1em 0;
+}
+
+summary::-webkit-details-marker { display: none; }

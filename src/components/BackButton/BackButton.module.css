@@ -1,0 +1,10 @@
+.container{
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    left: 12px;
+}

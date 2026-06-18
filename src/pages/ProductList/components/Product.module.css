@@ -1,0 +1,111 @@
+.container {
+    color: var(--primary);
+    display: flex;
+    flex-direction : row;
+    justify-content: space-between;
+    font-size: 1em;
+    padding: 8px 0px;
+    border-bottom: 1px solid white;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+    padding-left: 12px;
+}
+
+.product {
+    width: 100%;
+}
+
+.productName {
+    text-align: left;
+    margin: 4px 0px 8px;
+    font-size: 1.4em;
+    color : var(--primary);
+}
+
+.varieties {
+    flex-direction: column;
+    display: flex;
+    justify-items: stretch;
+    justify-content: flex-start;
+}
+
+.varietyTitle{
+    font-size: 1.5rem;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.varietyItem {
+    padding: 84px 16px 24px;
+    position: relative;
+    border-radius: 1em;
+    margin-bottom: 18px;
+    background-image: url('../../../assets/background-option.png');
+    background-repeat: no-repeat;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position: left;
+    box-shadow: 3px 2px 5px 0px var(--gray);
+    width: 100%;
+}
+
+.varietyPrice{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.weightedAveragePrice{
+    font-size: 1.3rem;
+}
+
+.varietyWinnerPrice{
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--error);
+}
+
+.varietyWinnerPriceDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-weight: bold;
+    text-align: right;
+}
+
+.varietyTime{
+    color: var(--terciary);
+    font-weight: 600;
+    font-size: .85em;
+}
+
+.btnAgregarOferta{
+    position: absolute;
+    display: flex;
+    gap: 5px;
+    top: 16px;
+    right: 16px;
+    min-height: 44px;
+    min-width: 150px;
+    padding: 8px;
+    border-radius: 1em;
+    border: 0;
+    background-color: var(--terciary);
+    color: var(--white);
+    cursor: pointer;
+    font-size: .9em;
+    font-weight: 600;
+    font-family: system-ui;
+    align-items: center;
+}
+
+.btnAgregarOferta:hover{
+    opacity: .75;
+}

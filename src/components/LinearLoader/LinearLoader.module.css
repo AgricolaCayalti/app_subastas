@@ -1,0 +1,42 @@
+.main {
+    height: 4px;
+    background-color: var(--secondary);
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.main:before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 6px;
+    background-color: #ffffff;
+    width: 50%;
+    top: -1px;
+    left: 0;
+    animation: slide-away 1s infinite linear;
+}
+
+.main:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 6px;
+    background-color: #ffffff;
+    width: 25%;
+    top: -1px;
+    left: 0;
+    animation: slide-away 1s infinite linear;
+}
+  
+@keyframes slide-away {
+    0% {
+        transform: translate(-100%, 0);
+    }
+    100% {
+        transform: translate(400%, 0);
+    }
+}

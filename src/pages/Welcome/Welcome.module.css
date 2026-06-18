@@ -1,0 +1,27 @@
+.container{
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    justify-content: center;
+}
+
+.title{
+    margin: 0px;
+    text-align: center;
+    color: var(--white);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 56.25px;
+}
+
+.logo{
+    text-align: center;
+}
+
+.logo img {
+    padding: 16px;
+    width: 50%;
+    text-align: center;
+    max-width: 300px;
+}

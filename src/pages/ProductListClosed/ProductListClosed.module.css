@@ -1,0 +1,8 @@
+.productlistBoxContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    padding: 0px 32px;
+    padding-top: 100px;
+}

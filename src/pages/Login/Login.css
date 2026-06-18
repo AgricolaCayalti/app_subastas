@@ -1,0 +1,108 @@
+.login-box-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--white);
+    height: 100%;
+}
+
+.login-lbl-title{
+    text-align: center;
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.login-lbl-title h2 {
+    margin: 0px;
+    line-height: 1.15;
+}
+
+.login-lbl-title-subastas{
+    color: var(--terciary);
+}
+
+.login-lbl-title-yarabamba{
+    color: var(--primary);
+}
+
+.login-box-logo{
+    text-align: center;
+}
+
+.login-blk-forgotpassword{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.login-box{
+    padding-bottom: 30px;
+    border-radius: 1em;
+    background-color: #ffffffa3;
+    width: calc(100% - 32px);
+    max-width: 400px;
+    margin: 12px auto;
+    text-align: center;
+    box-shadow: 3px 2px 5px 0px var(--gray)
+}
+
+.login-box-logo {
+    padding: 0px;
+}
+
+.login-box-logo img{
+    width: 100px;
+}
+
+.login-box-title{
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.login-blk-alreadyaccount{
+    text-align: center;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1rem
+}
+
+.lbl-forgotpassword, .lbl-register{
+    text-align: center;
+    color: var(--terciary);
+    font-weight: 600;
+    padding-bottom: 6px;
+    font-size: 1rem
+}
+
+
+.login-blk-logos {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+.login-blk-logos img {
+    max-height: 75px;
+    max-width: 320px;
+    width: 75%;
+}
+
+@media only screen and (max-height: 740px) {
+    .login-box {
+        padding-bottom: 12px;
+        margin: 8px auto;
+    }
+
+    .login-blk-logos {
+        bottom: 0px;
+        position: relative;
+    }
+
+    .login-blk-logos img {
+        max-height: 65px;
+    }
+ }

@@ -1,4 +1,4 @@
-import { useLocation, Navigate, Outlet } from "react-router";
+import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks";
 import {useSelector} from "react-redux";
 import {useEffect} from "react";

@@ -11,29 +11,31 @@
     "build:dev": "vite build --mode development"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
+    "@reduxjs/toolkit": "^2.12.0",
     "animate.css": "^4.1.1",
-    "axios": "^1.4.0",
-    "framer-motion": "^11.3.6",
-    "notistack": "^3.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^4.12.0",
-    "react-redux": "^8.1.1",
-    "react-router-dom": "^6.20.0"
+    "axios": "^1.18.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.40.0",
+    "notistack": "^3.0.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-icons": "^5.6.0",
+    "react-redux": "^9.3.0",
+    "react-router-dom": "^7.18.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
-    "autoprefixer": "^10.4.21",
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react-swc": "^4.3.1",
+    "autoprefixer": "^10.5.0",
     "css": "^3.0.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.2",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
     "post": "^0.0.1",
-    "tailwindcss": "^4.1.12",
-    "vite": "^5.3.1"
+    "tailwindcss": "^4.3.1",
+    "vite": "^8.0.16"
   }
 }

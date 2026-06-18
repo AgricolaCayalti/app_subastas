@@ -1,6 +1,6 @@
 import { ButtonForm } from "@/components"
 import styles from './TermsConditions.module.css'
-import { Navigate } from "react-router";
+import { Navigate } from "react-router-dom";
 import { useUI } from "@/hooks";
 import { TopBar } from "@/components/TopBar/TopBar";
 import { useState } from "react";

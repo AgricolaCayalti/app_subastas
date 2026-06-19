@@ -34,7 +34,8 @@
             "@/*": [
                 "./src/*"
             ]
-        }
+        },
+        "skipLibCheck": true
         /* (OPCIONAL) ----- Alias para imports (ej: @/components) ----- */
         // "baseUrl": ".",
         // "paths": {

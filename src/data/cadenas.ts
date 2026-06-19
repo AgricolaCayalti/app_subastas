@@ -66,7 +66,8 @@ const Cadenas = {
         PAGE_PRODUCTLIST_MODALREADME_TEXT_BLOCK_01: "En caso el precio ganador no cumpla con las expectativas comerciales de la empresa, ésta se reserva el derecho de no concretar la venta, aún cuando dicho precio haya sido el mayor ofertado.",
         PAGE_PRODUCTLIST_MODALREADME_BTN_OK: "OK",
         COMMON_AUTH_SESSION_EXPIRED: "Tu sesión expiró. Inicia sesión nuevamente.",
-        COMMON_AUTH_SESSION_NEED_SIGNIN: "Necesitas iniciar sesión"
+        COMMON_AUTH_SESSION_NEED_SIGNIN: "Necesitas iniciar sesión",
+        LOADING: "Cargando..."
     },
     EN : {
         PAGE_LOGIN_INICIAR_SESION: "Sign in",
@@ -135,7 +136,8 @@ const Cadenas = {
         PAGE_PRODUCTLIST_MODALREADME_TEXT_BLOCK_01: "In case the winning price does not meet the company’s commercial expectations, it reserves the right not to finalize the sale, even if such price was the highest bid.",
         PAGE_PRODUCTLIST_MODALREADME_BTN_OK: "OK",
         COMMON_AUTH_SESSION_EXPIRED: "Your session expired. Please sign in again.",
-        COMMON_AUTH_SESSION_NEED_SIGNIN: "You need to sign in"
+        COMMON_AUTH_SESSION_NEED_SIGNIN: "You need to sign in",
+        LOADING: "Loading..."
     }
 };
 

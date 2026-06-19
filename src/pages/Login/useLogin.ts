@@ -35,7 +35,7 @@ export const useLogin = () => {
             const expirationDate = new Date(expiresAt).getTime();
 
             login(user, token, expirationDate);
-            navigate(rutas.MAIN);
+            navigate("maintest"/* rutas.MAIN */);
         } catch (error: any) {
             setApiError(error.msg || 'Error al iniciar sesión');
         }

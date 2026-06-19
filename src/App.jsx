@@ -8,7 +8,7 @@ import { TermsConditions } from '@/pages/index.js';
 import rutas from './data/rutas';
 
 function App() {
-  const navigate = useNavigate();
+ /*  const navigate = useNavigate();
 
   useEffect(()=>{
     const fnBackButton = (e) => {
@@ -30,7 +30,7 @@ function App() {
     return ()=>{
       document.removeEventListener("backbutton", fnBackButton, false);
     }
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -41,6 +41,8 @@ function App() {
           <Route path={rutas.TERMS_CONDITIONS} element={<TermsConditions />} />
           <Route path={rutas.SIGNUP} element={<SignUp />} />
           <Route path={rutas.FORGOT_PASSWORD} element={<ForgotPassword />} />
+
+          <Route path={"maintest"} element={<Main />} />
 
           {/* Private */}
           <Route element = {<RequireAuth/>}>

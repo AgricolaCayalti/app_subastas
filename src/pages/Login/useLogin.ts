@@ -1,6 +1,5 @@
 // useLogin.ts
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/index.js";
 import rutas from "@/data/rutas.js";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,8 +10,8 @@ import { useAuthStore } from "@/store/useAuthStore";
 
 export const useLogin = () => {
     const navigate = useNavigate();
-    /* const { loadingLogin } = useAuth(); // asumo que login actualiza el estad */
     const { login } = useAuthStore();
+    const [ loadingLogin, setloadingLogin ] = useState(false);
     const [apiError, setApiError] = useState<string | null>(null);
 
     const {
@@ -29,15 +28,20 @@ export const useLogin = () => {
 
     const handleLogin = async (payload: LoginFormData) => {
         setApiError(null);
+        setloadingLogin(true);  
         try {
             const { data } = await httpClient.post('/iniciar-sesion', payload);
             const { token, expiresAt, user } = data.data;
             const expirationDate = new Date(expiresAt).getTime();
 
             login(user, token, expirationDate);
-            navigate("maintest"/* rutas.MAIN */);
+
+            console.log("RUTA = ", rutas.MAIN)
+            navigate(rutas.MAIN);
         } catch (error: any) {
             setApiError(error.msg || 'Error al iniciar sesión');
+        } finally {
+            setloadingLogin(false);
         }
     };
 
@@ -46,7 +50,7 @@ export const useLogin = () => {
         handleGoForgotPassword,
         handleSubmit,
         handleLogin,
-        /* loadingLogin: loadingLogin || isSubmitting, // combinamos cargas */
+        loadingLogin,
         register,
         errors,
         isSubmitting,

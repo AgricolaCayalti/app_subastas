@@ -1,6 +1,6 @@
-import { axiosPrivate } from "../api/axios";
+import { httpClient } from "@/api/httpClient";
 
 export const obtenerSubastasPasadas = async () => {
-    const res = await axiosPrivate.get(`/subastas/productos-ofertados?activas=0`);
-    return res.data;
+    const res = await httpClient.get(`/productos-ofertados?activas=0`);
+    return res.data.data;
 };

@@ -1,5 +1,5 @@
 export default {
-    LOGIN : "/login",
+    LOGIN : "/",
     TERMS_CONDITIONS : "/terms-conditions",
     SIGNUP : "/signup",
     FORGOT_PASSWORD : "/forgot-password",

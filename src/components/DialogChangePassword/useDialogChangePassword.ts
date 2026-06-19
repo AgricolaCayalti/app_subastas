@@ -48,10 +48,8 @@ export const useDialogChangePassword = ({ open, onOpenChange }: DialogChangePass
     return {
         strings,
         loading,
-        /* apiError, */
         control,
         handleSubmit,
-        /* reset, */
         errors,
         onFormSubmit,
     }

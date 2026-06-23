@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useUI } from '../../hooks';
 import { passwordSchema, type PasswordFormData } from '@/schemas/session.change.password';
 import { httpClient } from '@/api/httpClient';
-import type { DialogChangePasswordProps } from './type';
+import { useAuthChangePasswordStore } from '@/store/useAuthChangePasswordStore';
 
-export const useDialogChangePassword = ({ open, onOpenChange }: DialogChangePasswordProps) => {
+export const useDialogChangePassword = () => {
+    const { isDialogOpen, setDialogOpen, isLoading, setLoading, setError } = useAuthChangePasswordStore();
     const { strings } = useUI();
-    const [loading, setLoading] = useState(false);
-    const [apiError, setApiError] = useState<string | null>(null);
     const {
         control,
         handleSubmit,
@@ -24,21 +23,21 @@ export const useDialogChangePassword = ({ open, onOpenChange }: DialogChangePass
     });
 
     useEffect(() => {
-        if (!open) {
+        if (isDialogOpen) {
             reset();
         }
-    }, [open, reset]);
+    }, [isDialogOpen, reset]);
 
     const onFormSubmit = async (payload: PasswordFormData) => {
         setLoading(true);
-        setApiError(null);
+        setError(null);
         try {
             await httpClient.post('/sesion/cambiar-clave', { clave: payload.newPassword });
             alert(strings.PAGE_FORGOTPASSWORD_MSG_PASSWORD_CHANGED);
-            onOpenChange(false);
+            setDialogOpen(false);
             reset();
         } catch (error: any) {
-            setApiError(error.msg || 'Error al iniciar sesión');
+            setError(error.msg || 'Error al iniciar sesión');
         } finally {
             setLoading(false);
 
@@ -46,11 +45,13 @@ export const useDialogChangePassword = ({ open, onOpenChange }: DialogChangePass
     };
 
     return {
+        isDialogOpen,
+        setDialogOpen,
+        isLoading,
         strings,
-        loading,
         control,
         handleSubmit,
         errors,
-        onFormSubmit,
+        onFormSubmit
     }
 }

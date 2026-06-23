@@ -9,28 +9,22 @@ import {
     DialogTitle
 } from "@/components/ui/dialog";
 import { InputPassword } from '../Input/InputPassword';
-import { Loading } from '../Loading/Loading';
 import { useDialogChangePassword } from './useDialogChangePassword';
-import type { DialogChangePasswordProps } from './type';
 
-export const DialogChangePassword = ({ open, onOpenChange }: DialogChangePasswordProps) => {
+export const DialogChangePassword = () => {
     const {
+        isDialogOpen,
+        setDialogOpen,
+        isLoading,
         strings,
-        loading,
         control,
         handleSubmit,
         errors,
-        onFormSubmit 
-    } = useDialogChangePassword({ open, onOpenChange });
-
-    if (loading) {
-        return (
-            <Loading />
-        );
-    }
+        onFormSubmit
+    } = useDialogChangePassword();
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
             <DialogContent className="sm:max-w-sm">
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-center">
@@ -45,7 +39,7 @@ export const DialogChangePassword = ({ open, onOpenChange }: DialogChangePasswor
                         <Controller
                             name="newPassword"
                             control={control}
-                            disabled={loading}
+                            disabled={isLoading}
                             render={({ field }) => (
                                 <div>
                                     <InputPassword {...field} label="Nueva contraseña" />
@@ -58,7 +52,7 @@ export const DialogChangePassword = ({ open, onOpenChange }: DialogChangePasswor
                         <Controller
                             name="confirmPassword"
                             control={control}
-                            disabled={loading}
+                            disabled={isLoading}
                             render={({ field }) => (
                                 <div>
                                     <InputPassword {...field} label="Confirmar contraseña" />
@@ -71,7 +65,7 @@ export const DialogChangePassword = ({ open, onOpenChange }: DialogChangePasswor
                     </div>
 
                     <DialogFooter className="mt-4">
-                        <Button type="submit" disabled={loading}>{loading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}</Button>
+                        <Button type="submit" disabled={isLoading}>{isLoading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

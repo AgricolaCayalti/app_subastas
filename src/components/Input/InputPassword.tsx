@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/input-group";
 
 interface InputPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label?: string; // opcional, se usará como placeholder
+    label?: string; 
 }
 
 export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
@@ -22,7 +22,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
                     ref={ref}
                     type={showPassword ? "text" : "password"}
                     placeholder={label}
-                    {...props} // value, onChange, onBlur, etc.
+                    {...props}
                 />
                 <InputGroupAddon>
                     <FaLock />
@@ -30,6 +30,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
                 <InputGroupAddon align="inline-end" onClick={toggleShow}>
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </InputGroupAddon>
+                
             </InputGroup>
         );
     }

@@ -1,0 +1,47 @@
+import { ButtonMain } from "../../components";
+import Logo from "./../../assets/logo-2.png";
+import { ProfileButton } from "../../components/ProfileButton/ProfileButton";
+import { TopBar } from "../../components/TopBar/TopBar";
+import { useMain } from "./useMain";
+import { Loading } from "@/components/Loading/Loading";
+/* import { useAuthChangePasswordStore } from "@/store/useAuthChangePasswordStore"; */
+
+const TITLE_PAGE_NAME = "SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS";
+
+export const Main = () => {
+    const { strings, handleGoTo, isLoading/* , error */ } = useMain();
+    
+    return (
+        <div className="flex flex-col h-full justify-center background-gray background-imgmain">
+            <TopBar bgColor="white" ftColor="primary" title={TITLE_PAGE_NAME} />
+            <div className="flex flex-col gap-4 items-center mt-8 mb-8">
+                <div className="login-box-logo">
+                    <img
+                        src={Logo}
+                        alt="Logo"
+                        className="bg-white rounded-full pr-1.5 shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] border-[6px] border-[var(--terciary)]"
+                    />
+                </div>
+
+                <ButtonMain
+                    fontSize={17.5}
+                    bgColor="white"
+                    ftColor="secondary"
+                    onClick={() => handleGoTo("/products")}
+                >
+                    {strings.PAGE_MAIN_SUBASTAS_ACTIVAS}
+                </ButtonMain>
+                <ButtonMain
+                    fontSize={17.5}
+                    bgColor="white"
+                    ftColor="secondary"
+                    onClick={() => handleGoTo("/my-offers")}
+                >
+                    {strings.PAGE_MAIN_MIS_OFERTAS}
+                </ButtonMain>
+            </div>
+            {isLoading && <Loading />}
+            <ProfileButton  />
+        </div>
+    );
+};

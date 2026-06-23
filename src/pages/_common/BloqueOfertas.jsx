@@ -10,6 +10,7 @@ export const BloqueOfertas = ({titulo = "", subasta}) => {
     }
 
     return  <div>
+        <p>AAA</p>
                 <p className={styles.varietyOfferTitle}>{titulo} ({subasta.ofertas.length})</p>
                 <table className={styles.varietyOfferTable}>
                     <thead>

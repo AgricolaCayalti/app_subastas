@@ -4,6 +4,7 @@ import LogosLogin from "@/assets/logos-login.png";
 import { FaLock, FaUser } from "react-icons/fa";
 import { useLogin } from "@/pages/Login/useLogin";
 import { useUI } from "@/hooks";
+import { Loading } from "@/components/Loading/Loading";
 
 export const Login = () => {
     const { strings, language, onSetLanguage, languages } = useUI();
@@ -21,9 +22,11 @@ export const Login = () => {
 
     return (
         <form
-            className="flex flex-col items-center justify-center h-full w-full login-background text-white px-4  sm:py-10"
+            className="relative flex flex-col items-center justify-center h-full w-full login-background text-white px-4  sm:py-10"
             onSubmit={handleSubmit(handleLogin)}
         >
+            {/* Overlay de carga */}
+            {loadingLogin && <Loading />}
             <div className="absolute top-5 right-5 md:top-10 md:right-10">
                 <Switch
                     value={language === languages[0]}
@@ -57,7 +60,7 @@ export const Login = () => {
                         registration={register('username')}   // ← pasamos el resultado
                         errorMessage={errors.username?.message}
                     />
-                    
+
                     <InputLogin
                         icon={<FaLock />}
                         type="password"

@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
 import { ModalPrecio } from "./components/ModalPrecio";
 import { useProductList } from "./useProductList";
 import { TopBar } from "../../components/TopBar/TopBar";
 import { Loading } from "@/components/Loading/Loading";
-import { ProductOffers as ProductOffersType } from "./types";
-import { ModalReadme } from "./components/ModalReadme";
 import { ProductOffers } from "@/components/ProductOffers/ProductOffers";
+import { Readme } from "./components/Readmen";
+
 
 export const ProductList = () => {
-    const [itemMostrandoReadme, setItemMostrandoReadme] =
-        useState<ProductOffersType | null>(null);
     const {
         data: registros,
         isLoading,
         onListar,
         strings,
-        selected: seleccionado,
         onSelected: setSeleccionado,
+        readme,
+        setReadme
     } = useProductList();
-
-    useEffect(() => {
-        onListar();
-    }, []);
 
     return (
         <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
@@ -39,35 +33,12 @@ export const ProductList = () => {
                     handleAddOffer={setSeleccionado}
                 />
             )}
-            {Boolean(seleccionado) && !Boolean(itemMostrandoReadme) && (
-                <ModalPrecio onListarSubastas={onListar} />
-            )}
-            {Boolean(itemMostrandoReadme) && (
-                <ModalReadme
-                    handleClose={() => {
-                        setSeleccionado(seleccionado!);
-                        setItemMostrandoReadme(null);
-                    }}
-                />
-            )}
+
+            {
+                readme ? <Readme open={readme} onClose={() => setReadme(false)} /> : <ModalPrecio onListarSubastas={onListar} />
+            }
         </div>
     );
 };
-/* const handleAddOffer = (item : ProductOffers) => {
-        console.log("item", item);
-        const subastasReadmeLists = loadStorage({ key: "subastas-readme" }) ?? [];
-        console.log("subasta 0> ", subastasReadmeLists)
-        const esDeboMostrar = subastasReadmeLists.filter((idSubasta : number) => idSubasta === item.id).length <= 0;
 
-        if (esDeboMostrar) {
-            setItemMostrandoReadme(item);
-            saveStorage({
-                key: "subastas-readme",
-                data: [...subastasReadmeLists, item.id]
-            })
-            return;
-        }
-
-        setSeleccionado(item);
-    } */
-/* console.log("DONDE ESTA AMOR !!!!") */
+ {/* <ModalReadme handleClose={() => { setSeleccionado(seleccionado!); }} /> */}

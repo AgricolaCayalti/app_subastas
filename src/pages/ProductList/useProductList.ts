@@ -2,9 +2,12 @@ import { obtenerSubastasActivas } from "@/services/obtenerSubastasActivas.js";
 import { useUI } from "../../hooks";
 import { useProductsOffersStore } from "@/store/useProductsOffersStore";
 import { ProductOffers } from "./types";
+import { useSubastasStore } from "@/store/useSubastasStore";
+import { useEffect } from "react";
 
 export const useProductList = () => {
     const { setLoading, isLoading, setError, error, data, setData, selected, setSelected } = useProductsOffersStore();
+    const { readme, setReadme, handleAddOffer } = useSubastasStore();
     const { strings } = useUI();
 
     const getStringMomentoCierre = (dateTimeString: string, textoMostrar: string): string => {
@@ -45,7 +48,12 @@ export const useProductList = () => {
         }
     };
 
-    const onSelected = (item: ProductOffers | null) => {
+    useEffect(() => {
+        onListar();
+    }, []);
+
+    const onSelected = (item: ProductOffers) => {
+        handleAddOffer(item);
         setSelected(item);
     };
 
@@ -61,6 +69,8 @@ export const useProductList = () => {
         strings,
         selected,
         onSelected,
-        onClosed
+        onClosed,
+        readme,
+        setReadme
     }
 };

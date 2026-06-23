@@ -35,7 +35,7 @@ const generarEsquemaPrecios = (productos: ProductoDetalle[]) => {
 type FormPrecios = z.infer<ReturnType<typeof generarEsquemaPrecios>>;
 
 export const ModalPrecio = ({ onListarSubastas }) => {
-    const { selected: seleccionado, onSelected: setSeleccionado } = useProductList();
+    const { selected: seleccionado, onSelected: setSeleccionado, onClosed } = useProductList();
     const formRef = useRef<HTMLFormElement>(null);
     const { loading: isRegistrando, data, onRegistrar } = useModalPrecio();
     const { strings } = useUI();
@@ -84,7 +84,7 @@ export const ModalPrecio = ({ onListarSubastas }) => {
 
     // Cerrar y resetear
     const handleClose = () => {
-        setSeleccionado(null);
+        onClosed();
         reset();
     };
 

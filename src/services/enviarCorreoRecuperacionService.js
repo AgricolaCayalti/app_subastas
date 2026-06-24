@@ -1,7 +1,6 @@
-import axios from "../api/axios";
-const APP_KEY = import.meta.env.VITE_APP_KEY;
+import { httpClient } from "@/api/httpClient";
 
 export const enviarCorreoRecuperacionService = async (correo) => {
-    const res = await axios.post(`/usuarios-externos-correo-recuperacion`, {correo, app: APP_KEY});
-    return res.data;
+    const res = await httpClient.post(`/correo-recuperacion`, { correo });
+    return res.data.data;
 };

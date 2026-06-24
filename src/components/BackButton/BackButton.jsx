@@ -6,10 +6,11 @@ export const BackButton = ({color = "white"})=>{
     const navigate = useNavigate();
 
     const handleBack = ()=>{
+        console.log("ACA");
         navigate(-1);
     };
 
     return  <button onClick={handleBack} className={`${styles.container}`} style={{color: `var(--${styles[color]})`}}>
-                <FaArrowLeft fontSize={35}/>
+                <FaArrowLeft fontSize={25}/>
             </button>
 }

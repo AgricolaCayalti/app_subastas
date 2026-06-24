@@ -21,7 +21,7 @@ export const Product = ({ item, handleAddOffer }: ProductProps) => {
 
                 <div className="flex justify-between items-start gap-4">
                     <div className="text-2xl text-[var(--secondary)] font-medium">
-                        {strings.COMMON_SUBASTA_TITULO.replace(":0", item?.descripcion)}
+                        {strings.COMMON_SUBASTA_TITULO.replace(":0", item.descripcion)}
                     </div>
                     {
                         handleAddOffer && (
@@ -53,26 +53,28 @@ export const Product = ({ item, handleAddOffer }: ProductProps) => {
                     ))}
                 </div>
 
-                {
-                    bestOffersData.length && (
-                        <div className="text-xl flex flex-row justify-between text-[var(--error)] my-2">
-                            <b>{strings.PAGE_PRODUCTLIST_PRECIO_GANADOR}:</b>
-                            <div className="flex flex-col items-end font-bold text-right">
-                                <b>{bestOffersData[0].precioOfertado}</b>
-                                <small>({bestOffersData[0].fechaHoraOfertado})</small>
-                            </div>
+                <div className="text-xl flex flex-row justify-between text-[var(--error)] my-2">
+                    <b>{bestOffersData.length ? `${strings.PAGE_PRODUCTLIST_PRECIO_GANADOR}:` : `${strings.COMMON_MEJOR_OFERTA}`}</b>
+                    {
+                        bestOffersData.length ?
+                        <div className="flex flex-col items-end font-bold text-right">
+                            <b>{bestOffersData[0].precioOfertado}</b>
+                            <small>({bestOffersData[0].fechaHoraOfertado})</small>
                         </div>
-                    )
-                }
+                        :
+                        false
+                    }
+                </div>
 
-                {Boolean(item?.comentarios) && (
+
+                {Boolean(item?.comentarios) && handleAddOffer && (
                     <CollapsibleIndications comentarios={item.comentarios} />
                 )}
 
                 {
                     handleAddOffer && (
                         <div className="text-[var(--terciary)] font-semibold text-sm mt-2">
-                            <b>{strings.PAGE_PRODUCTLIST_CERRADA_EN}:</b> {item?.momentoCierre}
+                            <b>{strings.PAGE_PRODUCTLIST_CERRADA_EN}:</b> {item.momentoCierre}
                         </div>
                     )
                 }

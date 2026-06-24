@@ -11,6 +11,7 @@ export const useProductListClosed = () => {
         setError(null);
         try {
             const data = await obtenerSubastasPasadas();
+            console.log(data);
             setData(data);
         } catch (error) {
             setError("Error al cargar las subastas");

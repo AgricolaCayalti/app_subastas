@@ -26,10 +26,10 @@ export const MyOffers = () => {
                 {ofertas.map((item: any) => (
                     <div
                         key={item.id}
-                        className="flex items-center justify-between p-3 md:p-4 border  rounded-lg bg-gray-50/50 hover:bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200 group"
+                        className="flex flex-col justify-between p-3 md:p-4 border  rounded-lg bg-gray-50/50 hover:bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200 group"
                     >
-                        {/* Lado izquierdo: Fecha */}
-                        <div className="flex items-center gap-2.5">
+
+                        <div className="flex items-center justify-between gap-2.5">
                             {item.isFromUser && (
                                 <span
                                     className="flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full"
@@ -46,12 +46,11 @@ export const MyOffers = () => {
                             </div>
                         </div>
 
-                        {/* Lado derecho: Precio */}
-                        <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm border border-gray-100 group-hover:border-blue-200 group-hover:bg-blue-50/50 transition-colors">
-                            <FaMoneyBillAlt className="text-sm text-emerald-500" />
+                        <div className="flex flex-row-reverse items-center transition-colors gap-2">
                             <span className="font-bold text-gray-800 text-sm md:text-base">
                                 {item.precioOfertado}
                             </span>
+                            <FaMoneyBillAlt className="text-sm text-emerald-500" />
                         </div>
                     </div>
                 ))}

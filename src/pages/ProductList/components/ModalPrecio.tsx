@@ -94,10 +94,11 @@ export const ModalPrecio = ({ onListarSubastas }) => {
             idProducto: p.idProducto,
             precioOfertadoKg: data[`precio_ofertado_${p.id}`] ?? 0,
         }));
+        
 
         onRegistrar({
-            idProductoOfertado: seleccionado?.id,
-            preciosOfertados,
+            idProductoOfertado: seleccionado?.id ?? 0,
+            preciosOfertados: preciosOfertados ?? [],
         });
     };
 

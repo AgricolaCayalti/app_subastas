@@ -1,10 +1,12 @@
+import React from "react";
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"  // <-- Importa el botón
+import { Button } from "@/components/ui/button"
 import { useUI } from "@/hooks";
 
 interface ReadmeProps {
@@ -12,7 +14,7 @@ interface ReadmeProps {
     onClose: () => void;
 }
 
-export const Readme = ({ open, onClose }: ReadmeProps) => {
+export const Readme: React.FC<ReadmeProps> = ({ open, onClose }) => {
     const { strings } = useUI();
 
     return (
@@ -26,15 +28,14 @@ export const Readme = ({ open, onClose }: ReadmeProps) => {
                 <DialogHeader>
                     <DialogTitle>{strings.PAGE_PRODUCTLIST_MODALREADME_TITLE}</DialogTitle>
                 </DialogHeader>
-                <div className="-mx-4 no-scrollbar max-h-[50vh] overflow-y-auto px-4">
+                <DialogDescription>
                     {
                         [strings.PAGE_PRODUCTLIST_MODALREADME_TEXT_BLOCK_01].map(textBlock => (
                             <p key={textBlock}>{textBlock}</p>
                         ))
                     }
-                </div>
-                {/* Nuevo footer con el botón de cierre */}
-                <div className="mt-6 flex justify-end border-t pt-4">
+                </DialogDescription>
+                <div className="flex justify-end border-t pt-4">
                     <Button variant="outline" onClick={onClose}>
                         {strings.PAGE_PRODUCTLIST_MODALREADME_BTN_OK}
                     </Button>

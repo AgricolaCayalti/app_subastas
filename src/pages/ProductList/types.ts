@@ -29,3 +29,13 @@ export interface ProductOffers {
     mejorOferta: Offers[];         // array de ofertas
     momentoCierre: string;         // ej: "168 day(s) 19 hour(s) 4 minute(s)"
 }
+
+export interface PreciosOfertados {
+    idProducto: number | null;
+    precioOfertadoKg: number | null;
+} 
+
+export interface PayloadInsertOferta {
+    idProductoOfertado: number;
+    preciosOfertados: PreciosOfertados[];
+}

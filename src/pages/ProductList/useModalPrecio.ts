@@ -1,20 +1,19 @@
-import { useDispatch } from "react-redux";
 import { insertOferta } from "@/services/insertOferta.js";
 import { useState } from "react";
 import {useNotistack, useUI} from "../../hooks";
+import { PayloadInsertOferta } from "./types";
 
 export const useModalPrecio = () => {
-    const dispatch = useDispatch();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const { strings } = useUI();
     const { showNotyOK, showNotyError } = useNotistack();
-    const onRegistrar = async ({idProductoOfertado, preciosOfertados}) => {
+    const onRegistrar = async (payload: PayloadInsertOferta) => {
         setLoading(true);
         try {
             const data = await insertOferta({
-                idProductoOfertado,
-                preciosOfertados
+                idProductoOfertado: payload.idProductoOfertado,
+                preciosOfertados: payload.preciosOfertados
             });
 
             setData(data);

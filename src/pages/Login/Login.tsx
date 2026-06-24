@@ -15,9 +15,7 @@ export const Login = () => {
         loadingLogin,
         handleSubmit,
         register,
-        errors,/* 
-        isSubmitting,
-        isValid, */
+        errors
     } = useLogin();
 
     return (

@@ -7,6 +7,10 @@ interface AuthState {
     token: string | null;
     expiresAt: number | null;
     authenticated: boolean;
+    isLoading: boolean;
+    error: string | null;
+    setLoading: (loading: boolean) => void;
+    setError: (error: string | null) => void;
     login: (user: any, token: string, expiresAt: number) => void;
     logout: () => void;
 }
@@ -18,9 +22,13 @@ export const useAuthStore = create<AuthState>()(
             token: null,
             expiresAt: null,
             authenticated: false,
-            login: (user, token, expiresAt) => set({ user, token, expiresAt, authenticated: true }),
+            isLoading: false,
+            error: null,
+            setLoading: (loading: boolean) => set({ isLoading: loading }),
+            setError: (error: string | null) => set({ error }),
+            login: (user: any, token: string, expiresAt: number) => set({ user, token, expiresAt, authenticated: true }),
             logout: () => set({ user: null, token: null, expiresAt: null, authenticated: false }),
         }),
-        { name: 'auth-storage' } // persiste en localStorage automáticamente
+        { name: 'auth-storage' }
     )
 );

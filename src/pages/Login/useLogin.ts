@@ -1,24 +1,20 @@
-// useLogin.ts
 import { useNavigate } from "react-router-dom";
 import rutas from "@/data/rutas.js";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema, LoginFormData } from '@/schemas/login.schema';
-import { httpClient } from '@/api/httpClient'; // tu archivo axios
-import { useState } from 'react';
+import { loginSchema, LoginRequest } from '@/schemas/login.schema';
 import { useAuthStore } from "@/store/useAuthStore";
+import { loginService } from "@/services/loginService";
 
 export const useLogin = () => {
     const navigate = useNavigate();
-    const { login } = useAuthStore();
-    const [ loadingLogin, setloadingLogin ] = useState(false);
-    const [apiError, setApiError] = useState<string | null>(null);
+    const { login, setLoading, setError, isLoading : loadingLogin, error } = useAuthStore();
 
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting, isValid },
-    } = useForm<LoginFormData>({
+    } = useForm<LoginRequest>({
         resolver: zodResolver(loginSchema),
         mode: 'onChange'
     });
@@ -26,22 +22,18 @@ export const useLogin = () => {
     const handleGoSignUp = () => navigate(rutas.TERMS_CONDITIONS);
     const handleGoForgotPassword = () => navigate(rutas.FORGOT_PASSWORD);
 
-    const handleLogin = async (payload: LoginFormData) => {
-        setApiError(null);
-        setloadingLogin(true);  
+    const handleLogin = async (payload: LoginRequest) => {
+        setError(null);
+        setLoading(true);  
         try {
-            const { data } = await httpClient.post('/iniciar-sesion', payload);
-            const { token, expiresAt, user } = data.data;
+            const { token, expiresAt, user } = await loginService(payload);
             const expirationDate = new Date(expiresAt).getTime();
-
             login(user, token, expirationDate);
-
-            console.log("RUTA = ", rutas.MAIN)
             navigate(rutas.MAIN);
         } catch (error: any) {
-            setApiError(error.msg || 'Error al iniciar sesión');
+            setError(error.msg || 'Error al iniciar sesión');
         } finally {
-            setloadingLogin(false);
+            setLoading(false);
         }
     };
 
@@ -55,6 +47,6 @@ export const useLogin = () => {
         errors,
         isSubmitting,
         isValid,
-        apiError, // para mostrar en el formulario
+        error
     };
 };

@@ -1,6 +1,14 @@
 import { httpClient } from "@/api/httpClient";
 
-export const insertOferta = async (data) => {
+interface InsertOfertaRequest {
+    idProductoOfertado: string;
+    preciosOfertados: Array<{
+        idProducto: string;
+        precioOfertadoKg: number;
+    }>;
+}
+
+export const insertOferta = async (data: InsertOfertaRequest) => {
     const res = await httpClient.post(
         `/comprador-ofertas`, {
             codigo_de_subasta : data.idProductoOfertado,

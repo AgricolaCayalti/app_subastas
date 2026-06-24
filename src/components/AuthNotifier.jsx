@@ -1,11 +1,11 @@
 // ui/AuthNotifier.tsx
-import { useEffect } from 'react';
+/* import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {useNotistack, useUI} from "@/hooks/index.js";
-import {clearLogoutReason} from "@/store/auth/authSlice.js";
+import {clearLogoutReason} from "@/store/auth/authSlice.js"; */
 
 export default function AuthNotifier() {
-    const { logoutReason } = useSelector((state) => state.auth);
+    /* const { logoutReason } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const { showNoty } = useNotistack();
     const {strings} = useUI();
@@ -28,7 +28,7 @@ export default function AuthNotifier() {
         }
 
         dispatch(clearLogoutReason());
-    }, [logoutReason, showNoty, dispatch]);
+    }, [logoutReason, showNoty, dispatch]); */
 
     return null;
 }

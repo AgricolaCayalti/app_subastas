@@ -1,12 +1,7 @@
 import { httpClient } from "@/api/httpClient";
+import { ChangePasswordRequest } from "@/schemas/recover.email.password.schema";
 
-interface CambiarClaveRecuperacionRequest {
-    codigo: string;
-    correo: string;
-    clave: string;
-}
-
-export const cambiarClaveRecuperacionService = async ({ codigo, correo, clave }: CambiarClaveRecuperacionRequest) => {
+export const cambiarClaveRecuperacionService = async ({ codigo, correo, clave }: ChangePasswordRequest) => {
     const { data } = await httpClient.post(`/cambiar-clave`, {
         codigo,
         correo,

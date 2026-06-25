@@ -1,12 +1,7 @@
 import { httpClient } from "@/api/httpClient";
+import { ValidateCodeRequest } from "@/schemas/recover.email.password.schema";
 
-interface ValidarCodigoRecuperacionRequest {
-    codigo: string;
-    correo: string;
-}
-
-/* string: email, string: token */
-export const validarCodigoRecuperacionService = async ({ codigo, correo }: ValidarCodigoRecuperacionRequest) => {
+export const validarCodigoRecuperacionService = async ({ codigo, correo }: ValidateCodeRequest) => {
     const res = await httpClient.post(`/validar-codigo`, { codigo, correo });
     return res.data.data;
 };

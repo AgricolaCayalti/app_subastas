@@ -1,117 +1,67 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { enviarCorreoRecuperacionService } from "@/services/enviarCorreoRecuperacionService.js";
-import { validarCodigoRecuperacionService } from "@/services/validarCodigoRecuperacionService.js";
-import { Constantes } from "../../data/constantes";
-import { cancelCodeSent, updateCodeSent } from "@/store/auth/authSlice.js";
-import { cambiarClaveRecuperacionService } from "@/services/cambiarClaveRecuperacionService.js";
-import {useNotistack, useUI} from "../../hooks";
-
-const defaultFormValues = {
-    correo: "",
-    codigo: "",
-    clave : "",
-    clave_confirmar: ""
-};
+import { useUI } from "@/hooks";
+import { cambiarClaveRecuperacionService } from "@/services/cambiarClaveRecuperacionService";
+import { enviarCorreoRecuperacionService } from "@/services/enviarCorreoRecuperacionService";
+import { validarCodigoRecuperacionService } from "@/services/validarCodigoRecuperacionService";
+import { useForgotPasswordStore } from "@/store/useForgotPasswordStore";
+import { useNavigate } from "react-router-dom";
+import rutas from "@/data/rutas";
+import { ChangePasswordRequest, SendRecoveryRequest, ValidateCodeRequest } from "@/schemas/recover.email.password.schema";
 
 export const useForgotPassword = () => {
-    const dispatch = useDispatch();
-    const { mailCodeSent, timeCodeSent } = useSelector( state => state.auth );
-    const [form, setForm] = useState({...defaultFormValues, correo: mailCodeSent ?? ""});
-    const [loading, setLoading] = useState(false);
-    const [loadingValidar, setLoadingValidar] = useState(false);
-    const [isShowingChangePassword, setIsShowingChangePassword] = useState(false);
-    const {strings} = useUI();
-    const { showNotyError } = useNotistack();
+    const { step, isLoading, error, setStep, setLoading, setError } = useForgotPasswordStore();
+    const { strings } = useUI();
+    const navigate = useNavigate();
 
-    const onSetValueForm = (key, value) => {
-        setForm(currentForm => {
-            return {
-                ...currentForm,
-                [key]: value
-            };
-        })
-    };
-
-    const onEnviarCorreo = async (fnImperative) => {
+    const onSendRecovery = async (payload: SendRecoveryRequest) => {
         setLoading(true);
+        setError(null);
         try {
-            const data = await enviarCorreoRecuperacionService(form.correo);
-
-            dispatch(updateCodeSent(form.correo));
-
-            if (fnImperative){
-                fnImperative(data);
-            }
+            const data = await enviarCorreoRecuperacionService(payload);
+            console.log("data", data);
+            setStep(1);
         } catch (error) {
-            throw error;
+            setError("Error al cargar las subastas");
         } finally {
             setLoading(false);
-        }
-    };
+        }        
+    }
 
-    const onRefreshCodigo = () => {
-        if (timeCodeSent == null){
-            return;
-        }
-        const now   = new Date();
-        const minutes = Math.floor((now.getTime() - new Date(timeCodeSent)) / 1000 / 60);
-
-        if (minutes > Constantes.TIEMPO_TOKEN_DURACION_MINUTOS){
-            dispatch(cancelCodeSent());
-            setForm(defaultFormValues);
-            setIsShowingChangePassword( false );
-        }
-    };
-
-    const onValidarCodigo = async () => {
-        setLoadingValidar(true);
+    const onValidateCode = async (payload: ValidateCodeRequest) => {
+        setLoading(true);
+        setError(null);
         try {
-            const codigoRes = await validarCodigoRecuperacionService(form);
-            if (codigoRes != 0){
-                setIsShowingChangePassword(true);
-                return;
-            }
-
-            throw new Error(strings.COMMON_CODIGO_NO_VALIDO)
+            const data = await validarCodigoRecuperacionService(payload);
+            console.log("data", data);
+            setStep(2);
         } catch (error) {
-            showNotyError({error});
+            setError("Error al cargar las subastas");
         } finally {
-            setLoadingValidar(false);
-        }
-    };
+            setLoading(false);
+        }        
+    }
 
-    const onCambiarClave = async(fnImperative) => {
-        setLoadingValidar(true);
+    const onChangePassword = async (payload: ChangePasswordRequest) => {
+        setLoading(true);
+        setError(null);
         try {
-            const codigoRes = await cambiarClaveRecuperacionService(form);
-            dispatch(cancelCodeSent());
-            if (codigoRes != 0){
-                if (fnImperative){
-                    fnImperative();
-                }
-
-                return;
-            }
-
-            throw new Error(strings.COMMON_CODIGO_NO_VALIDO);
+            const data = await cambiarClaveRecuperacionService(payload);
+            console.log("data", data);
+            setStep(0);
+            navigate(rutas.LOGIN);
         } catch (error) {
-            throw error;
+            setError("Error al cargar las subastas");
         } finally {
-            setLoadingValidar(false);
-        }
-    };
+            setLoading(false);
+        }        
+    }
 
     return {
-        form, 
-        onSetValueForm,
-        isCodeSent : Boolean(mailCodeSent),
-        isShowingChangePassword,
-        loading,
-        loadingValidar,
-        onEnviarCorreo,
-        onValidarCodigo,
-        onRefreshCodigo,
-        onCambiarClave
+        step,
+        isLoading,
+        error,
+        onSendRecovery,
+        onValidateCode,
+        onChangePassword,
+        strings
     }
 };

@@ -10,6 +10,7 @@ import { useUI } from '../../hooks';
 import { useEffect, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { Layout } from '@/components/Layout/Layout';
 
 const TITLE_PAGE_NAME = "SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS";
 
@@ -97,8 +98,9 @@ export const ForgotPassword = () => {
     }, []);
 
     return (
-        <div className={styles.boxContainer}>
-            <TopBar title={TITLE_PAGE_NAME} bgColor="white" ftColor="primary" shouldShowBackBtn />
+        <Layout  title={TITLE_PAGE_NAME}>
+        {/* <div className={styles.boxContainer}>
+            <TopBar bgColor="white" ftColor="primary" shouldShowBackBtn /> */}
             <h3 className={styles.lblSubtitle}>{strings.PAGE_FORGOTPASSWORD_INGRESE_CORREO}</h3>
             
             <form className={styles.frmMain} onSubmit={handleSubmit}>
@@ -172,6 +174,6 @@ export const ForgotPassword = () => {
                     </ButtonForm>
                 </form>
             )}
-        </div>
+        </Layout>
     );
 };

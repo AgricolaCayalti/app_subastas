@@ -5,6 +5,6 @@ interface EnviarCorreoRecuperacionRequest {
 }
 
 export const enviarCorreoRecuperacionService = async ({ correo }: EnviarCorreoRecuperacionRequest) => {
-    const res = await httpClient.post(`/correo-recuperacion`, { correo });
-    return res.data.data;
+    const { data } = await httpClient.post(`/correo-recuperacion`, { correo });
+    return data.data;
 };

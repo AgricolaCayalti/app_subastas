@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { TopBar } from "../../components/TopBar/TopBar";
 import { Loading } from "@/components/Loading/Loading";
 import { ProductOffers } from "@/components/ProductOffers/ProductOffers";
 import { useProductListClosed } from "./useProductListClosed";
+import { Layout } from "@/components/Layout/Layout";
 
 export const ProductListClosed = () => {
     const {
@@ -17,12 +17,13 @@ export const ProductListClosed = () => {
     }, []);
 
     return (
-        <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
+        <Layout title={strings.PAGE_PRODUCTLISTCLOSED_TITULO}>
+        {/* <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
             <TopBar
                 title={strings.PAGE_PRODUCTLISTCLOSED_TITULO}
                 bgColor={"secondary"}
                 shouldShowBackBtn={true}
-            />
+            /> */}
             {isLoading ? (
                 <Loading />
             ) : (
@@ -31,6 +32,6 @@ export const ProductListClosed = () => {
                     title={strings.COMMON_SIN_SUBASTAS_PARA_MOSTRAR}
                 />
             )}
-        </div>
+        </Layout>
     );
 };

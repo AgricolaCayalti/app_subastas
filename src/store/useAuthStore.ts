@@ -13,11 +13,12 @@ interface AuthState {
     setError: (error: string | null) => void;
     login: (user: any, token: string, expiresAt: number) => void;
     logout: () => void;
+    verifySession: () => boolean;
 }
 
 export const useAuthStore = create<AuthState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             user: null,
             token: null,
             expiresAt: null,
@@ -28,6 +29,15 @@ export const useAuthStore = create<AuthState>()(
             setError: (error: string | null) => set({ error }),
             login: (user: any, token: string, expiresAt: number) => set({ user, token, expiresAt, authenticated: true }),
             logout: () => set({ user: null, token: null, expiresAt: null, authenticated: false }),
+            verifySession: () => {
+                const { logout, token, expiresAt } = get();
+                const now = new Date().getTime();
+                if (!token || !expiresAt || now >= expiresAt) {
+                    logout();
+                    return false;
+                }
+                return true;
+            },
         }),
         { name: 'auth-storage' }
     )

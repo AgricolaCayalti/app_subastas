@@ -3,6 +3,7 @@ import { Login, Main, SignUp, ProductList, ProductListClosed, ForgotPassword } f
 import { TermsConditions } from '@/pages/index.js';
 import rutas from '@/data/rutas';
 import { PublicRoute, PrivateRoute } from '@/routes';
+import { PrivateLayout } from './PrivateLayout';
 
 
 export const AppRoutes = () => (
@@ -18,9 +19,11 @@ export const AppRoutes = () => (
 
       {/* Private */}
       <Route element={<PrivateRoute />}>
-        <Route path={rutas.MAIN} element={<Main />} />
-        <Route path={rutas.PRODUCTS} element={<ProductList />} />
-        <Route path={rutas.MY_OFFERS} element={<ProductListClosed />} />
+        <Route element={<PrivateLayout />}>
+          <Route path={rutas.MAIN} element={<Main />} />
+          <Route path={rutas.PRODUCTS} element={<ProductList />} />
+          <Route path={rutas.MY_OFFERS} element={<ProductListClosed />} />
+        </Route>
       </Route>
       { /* Catch all */}
       <Route path="*" element={<Login />} />

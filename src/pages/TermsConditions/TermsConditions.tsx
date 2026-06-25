@@ -1,42 +1,34 @@
 import React from "react";
 import { ButtonForm } from "@/components";
 import { Navigate } from "react-router-dom";
-import { TopBar } from "@/components/TopBar/TopBar";
 import { Switch } from "@/components/Switch/Switch";
 import rutas from "@/data/rutas";
 import { useTermsConditions } from "./useTermsConditions";
-
-const TITLE_PAGE_NAME = "TÉRMINOS Y CONDICIONES DE USO";
+import { Layout } from "@/components/Layout/Layout";
 
 export const TermsConditions = () => {
     const { isChecked, toggleCheck, handleSubmit, strings, isAcceptedTYC } = useTermsConditions();
 
-    if ( isAcceptedTYC ) {
+    if (isAcceptedTYC) {
         return <Navigate to={rutas.SIGNUP} replace={true} />;
     }
 
     return (
-        <div className="bg-white flex flex-col h-full justify-start px-8 pt-[100px]">
-            <TopBar
-                title={TITLE_PAGE_NAME}
-                bgColor="white"
-                ftColor="primary"
-                shouldShowBackBtn={true}
-            />
+        <Layout title="TÉRMINOS Y CONDICIONES DE USO">
             <form
                 className="flex flex-col justify-center gap-3"
                 onSubmit={handleSubmit}
             >
                 <div className="text-primary text-justify">
-                    <p>{strings.TERMINOS_CONDICIONES}</p>
+                    <p className="mb-4">{strings.TERMINOS_CONDICIONES}</p>
                     {strings.TERMINOS_CONDICIONES_CLAUSULAS?.map((item, index) => (
                         <React.Fragment key={index}>
-                            <p>
+                            <p className="mb-2">
                                 <b>
                                     {index + 1}. {item.TITULO}
                                 </b>
                             </p>
-                            <p>{item.DESCRIPCION}</p>
+                            <p className="mb-4">{item.DESCRIPCION}</p>
                         </React.Fragment>
                     ))}
                     <div className="text-left">
@@ -65,6 +57,6 @@ export const TermsConditions = () => {
                     {strings.PAGE_TERMSCONDITIONS_BTN_ACCEPT}
                 </ButtonForm>
             </form>
-        </div>
+        </Layout>
     );
 };

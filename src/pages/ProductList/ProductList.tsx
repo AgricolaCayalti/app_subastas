@@ -1,9 +1,9 @@
 import { ModalPrecio } from "./components/ModalPrecio";
-import { useProductList } from "./useProductList";
-import { TopBar } from "../../components/TopBar/TopBar";
+import { useProductList } from "./useProductList"; 
 import { Loading } from "@/components/Loading/Loading";
 import { ProductOffers } from "@/components/ProductOffers/ProductOffers";
 import { Readme } from "./components/Readmen";
+import { Layout } from "@/components/Layout/Layout";
 
 
 export const ProductList = () => {
@@ -18,12 +18,13 @@ export const ProductList = () => {
     } = useProductList();
 
     return (
-        <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
+        <Layout title={strings.PAGE_PRODUCTLIST_TITULO}>
+            {/* <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
             <TopBar
                 title={strings.PAGE_PRODUCTLIST_TITULO}
                 bgColor={"secondary"}
                 shouldShowBackBtn={true}
-            />
+            /> */}
             {isLoading ? (
                 <Loading />
             ) : (
@@ -37,8 +38,6 @@ export const ProductList = () => {
             {
                 readme ? <Readme open={readme} onClose={() => setReadme(false)} /> : <ModalPrecio onListarSubastas={onListar} />
             }
-        </div>
+        </Layout>
     );
-};
-
- {/* <ModalReadme handleClose={() => { setSeleccionado(seleccionado!); }} /> */}
+}; 

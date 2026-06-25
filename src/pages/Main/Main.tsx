@@ -1,19 +1,17 @@
 import { ButtonMain } from "../../components";
 import Logo from "./../../assets/logo-2.png";
 import { ProfileButton } from "../../components/ProfileButton/ProfileButton";
-import { TopBar } from "../../components/TopBar/TopBar";
 import { useMain } from "./useMain";
 import { Loading } from "@/components/Loading/Loading";
-/* import { useAuthChangePasswordStore } from "@/store/useAuthChangePasswordStore"; */
-
-const TITLE_PAGE_NAME = "SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS";
+import { Layout } from "@/components/Layout/Layout";
 
 export const Main = () => {
     const { strings, handleGoTo, isLoading/* , error */ } = useMain();
-    
+
     return (
-        <div className="flex flex-col h-full justify-center background-gray background-imgmain">
-            <TopBar bgColor="white" ftColor="primary" title={TITLE_PAGE_NAME} />
+        <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS">
+            {/* <div className="flex flex-col h-full justify-center background-gray background-imgmain">
+            <TopBar bgColor="white" ftColor="primary" title={TITLE_PAGE_NAME} /> */}
             <div className="flex flex-col gap-4 items-center mt-8 mb-8">
                 <div className="login-box-logo">
                     <img
@@ -41,7 +39,7 @@ export const Main = () => {
                 </ButtonMain>
             </div>
             {isLoading && <Loading />}
-            <ProfileButton  />
-        </div>
+            <ProfileButton />
+        </Layout>
     );
 };

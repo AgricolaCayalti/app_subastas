@@ -1,4 +1,4 @@
-import { ButtonForm } from '@/components/index.js';
+/* import { ButtonForm } from '@/components/index.js';
 import { InputForm } from '@/components/index.js';
 import { FaUser, FaAddressCard, FaLock, FaPhone, FaEnvelope } from 'react-icons/fa6'
 import styles from './SignUp.module.css'
@@ -11,11 +11,13 @@ import { TopBar } from '../../components/TopBar/TopBar';
 import { useAppUtilityCordova } from '@/hooks/index.js';
 import { useUI } from '../../hooks';
 import rutas from '@/data/rutas';
-import { Layout } from '@/components/Layout/Layout';
+import { Layout } from '@/components/Layout/Layout'; */
+
+import { Layout } from "@/components/Layout/Layout";
 
 
 export const SignUp = () => {
-    const [errorClaves, setErrorClaves] = useState(false);
+    /* const [errorClaves, setErrorClaves] = useState(false);
     const [lastSearchedNumber, setLastSearchedNumber] = useState("");
     const { form, onSetValueForm, loading: cargandoForm, onGuardar } = useSignUp();
     const { loading: loadingDocument, onConsultar: onConsultarDocument } = useConsultaDocumento();
@@ -66,11 +68,13 @@ export const SignUp = () => {
         }
 
         setErrorClaves(form.password != form.password_confirm);
-    }, [form.password, form.password_confirm]);
+    }, [form.password, form.password_confirm]); */
 
-    return <Layout title={strings.TITLE_PAGE_NAME}>
+    return <Layout>
+        <h1>HOLA MUNDO</h1>
         {/* <div className={styles.signupBoxContainer}>
                 <TopBar title={strings.TITLE_PAGE_NAME} bgColor={"white"} ftColor={"primary"} shouldShowBackBtn={true}/> */}
+        {/*
         <h3 className={styles.signupLblSubtitle}>{strings.PAGE_SIGNUP_REGISTRATE}</h3>
         <form className={styles.signupFrmMain} onSubmit={handleSubmit}>
             <InputForm icon={<FaAddressCard />} name={"numero_documento"} required label={strings.PAGE_SIGNUP_RUCDNI} value={form.numero_documento ?? ""} onChange={handleOnChange} />
@@ -93,5 +97,6 @@ export const SignUp = () => {
                     : <ButtonForm disabled={cargandoForm || errorClaves} bgColor='secondary' type="submit">{strings.PAGE_SIGNUP_BTN_REGISTRAR}</ButtonForm>
             }
         </form>
+        */}
     </Layout>
 };

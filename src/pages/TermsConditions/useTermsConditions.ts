@@ -3,11 +3,11 @@ import { useState } from "react";
 
 export const useTermsConditions = () => {
     const [ isChecked, setIsChecked ] = useState(false);
-    const { strings, isAcceptedTYC, onActivateAcceptedTYC } = useUI();
+    const { strings, isAcceptedTYC, onToggleCheck } = useUI();
 
     const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onActivateAcceptedTYC();
+        onToggleCheck();
     };
 
     const toggleCheck = () => setIsChecked((prev) => !prev);

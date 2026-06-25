@@ -5,25 +5,25 @@ interface UIStore {
     lang: string;
     isAcceptedTYC: boolean;
     setLanguage: () => void;
-    activateAcceptedTYC: () => void;
+    toggleCheck: () => void;
 }
 
 const SESSION_LANG_NAME = import.meta.env.VITE_SESSION_LANG_NAME;
-const DEFAULT_LANG = import.meta.env.VITE_LANGUAGE_DEFAULT || 'EN';
 
 export const useUIStore = create<UIStore>()(
     persist(
         (set, get) => ({
-            lang: DEFAULT_LANG,
+            lang: "ES",
             isAcceptedTYC: false,
             setLanguage: () => {
                 const currentLang = get().lang;
                 const newLang = currentLang === 'EN' ? 'ES' : 'EN';
                 set({ lang: newLang });
             },
-            activateAcceptedTYC: () => {
-                set({ isAcceptedTYC: true });
-            },
+            toggleCheck: () => {
+                const currentCheck = get().isAcceptedTYC;
+                set({ isAcceptedTYC: !currentCheck });
+            }
         }),
         {
             name: SESSION_LANG_NAME,

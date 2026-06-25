@@ -11,7 +11,7 @@ export const Main = () => {
     return (
         <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS">
             {/* <div className="flex flex-col h-full justify-center background-gray background-imgmain">
-            <TopBar bgColor="white" ftColor="primary" title={TITLE_PAGE_NAME} /> */}
+            <TopBar bgColor="white" ftColor="primary" title={strings.TITLE_PAGE_NAME} /> */}
             <div className="flex flex-col gap-4 items-center mt-8 mb-8">
                 <div className="login-box-logo">
                     <img

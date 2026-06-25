@@ -13,7 +13,6 @@ import { useUI } from '../../hooks';
 import rutas from '@/data/rutas';
 import { Layout } from '@/components/Layout/Layout';
 
-const TITLE_PAGE_NAME = "SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS";
 
 export const SignUp = () => {
     const [errorClaves, setErrorClaves] = useState(false);
@@ -69,9 +68,9 @@ export const SignUp = () => {
         setErrorClaves(form.password != form.password_confirm);
     }, [form.password, form.password_confirm]);
 
-    return <Layout title={TITLE_PAGE_NAME}>
+    return <Layout title={strings.TITLE_PAGE_NAME}>
         {/* <div className={styles.signupBoxContainer}>
-                <TopBar title={TITLE_PAGE_NAME} bgColor={"white"} ftColor={"primary"} shouldShowBackBtn={true}/> */}
+                <TopBar title={strings.TITLE_PAGE_NAME} bgColor={"white"} ftColor={"primary"} shouldShowBackBtn={true}/> */}
         <h3 className={styles.signupLblSubtitle}>{strings.PAGE_SIGNUP_REGISTRATE}</h3>
         <form className={styles.signupFrmMain} onSubmit={handleSubmit}>
             <InputForm icon={<FaAddressCard />} name={"numero_documento"} required label={strings.PAGE_SIGNUP_RUCDNI} value={form.numero_documento ?? ""} onChange={handleOnChange} />

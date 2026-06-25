@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { InputPassword } from '../Input/InputPassword';
 import { useDialogChangePassword } from './useDialogChangePassword';
+import { ButtonForm } from '../ButtonForm/ButtonForm';
 
 export const DialogChangePassword = () => {
     const {
@@ -65,7 +66,10 @@ export const DialogChangePassword = () => {
                     </div>
 
                     <DialogFooter className="mt-4">
-                        <Button type="submit" disabled={isLoading}>{isLoading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}</Button>
+                        <ButtonForm type="submit" bgColor="terciary" disabled={isLoading}>
+                            {isLoading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}
+                        </ButtonForm>
+                        {/* <Button type="submit" disabled={isLoading}>{isLoading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}</Button> */}
                     </DialogFooter>
                 </form>
             </DialogContent>

@@ -1,4 +1,5 @@
 import { httpClient } from "@/api/httpClient";
+import { PayloadInsertOferta } from "@/pages/ProductList/types";
 
 interface InsertOfertaRequest {
     idProductoOfertado: string;
@@ -8,7 +9,7 @@ interface InsertOfertaRequest {
     }>;
 }
 
-export const insertOferta = async (payload: InsertOfertaRequest) => {
+export const insertOferta = async (payload: PayloadInsertOferta) => {
     const { data } = await httpClient.post(
         `/comprador-ofertas`, {
             codigo_de_subasta : payload.idProductoOfertado,

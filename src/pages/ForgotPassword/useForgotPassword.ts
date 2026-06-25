@@ -1,4 +1,4 @@
-import { useUI } from "@/hooks";
+import { useNotistack, useUI } from "@/hooks";
 import { cambiarClaveRecuperacionService } from "@/services/cambiarClaveRecuperacionService";
 import { enviarCorreoRecuperacionService } from "@/services/enviarCorreoRecuperacionService";
 import { validarCodigoRecuperacionService } from "@/services/validarCodigoRecuperacionService";
@@ -21,7 +21,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 
 export const useForgotPassword = () => {
-    const { step, isLoading, error, setStep, setLoading, setError, email, setEmail, expiredAt } = useForgotPasswordStore();
+    const { showNotyError, showConfirm } = useNotistack();
+    const { step, isLoading, setStep, setLoading, email, setEmail, expiredAt } = useForgotPasswordStore();
     const [codeSent, setCodeSent] = useState<string>("");
     const [timeLeft, setTimeLeft] = useState<string>("");
     const { strings } = useUI();
@@ -60,13 +61,12 @@ export const useForgotPassword = () => {
 
     const onSendRecovery = async (payload: SendRecoveryRequest) => {
         setLoading(true);
-        setError(null);
         try {
             const data = await enviarCorreoRecuperacionService(payload);
             setStep(1, data.expiresAt);
             setEmail(payload.correo);
         } catch (error) {
-            setError("Error al cargar las subastas");
+            showNotyError({ error: (error as any).msg });
         } finally {
             setLoading(false);
         }
@@ -74,29 +74,36 @@ export const useForgotPassword = () => {
 
     const onValidateCode = async (payload: ValidateCodeRequest) => {
         setLoading(true);
-        setError(null);
         try {
             await validarCodigoRecuperacionService(payload);
             setStep(2);
         } catch (error) {
-            setError("Error al cargar las subastas");
+            showNotyError({ error: (error as any).msg });
         } finally {
             setLoading(false);
         }
     }
 
     const onChangePassword = async (payload: ChangePasswordRequest) => {
-        setLoading(true);
-        setError(null);
-        try {
-            await cambiarClaveRecuperacionService(payload);
-            setStep(0);
-            setEmail("");
-            navigate(rutas.LOGIN);
-        } catch (error) {
-            setError("Error al cargar las subastas");
-        } finally {
-            setLoading(false);
+        const confirmed = await showConfirm({
+            message: '¿Estás seguro de cambiar tu contraseña?',
+            confirmText: 'Sí',
+            cancelText: 'No',
+            severity: 'info' 
+        });
+
+        if (confirmed) {
+            setLoading(true);
+            try {
+                await cambiarClaveRecuperacionService(payload);
+                setStep(0);
+                setEmail("");
+                navigate(rutas.LOGIN);
+            } catch (error) {
+                showNotyError({ error: (error as any).msg });
+            } finally {
+                setLoading(false);
+            }
         }
     }
 
@@ -160,7 +167,6 @@ export const useForgotPassword = () => {
     return {
         step,
         isLoading,
-        error,
         strings,
         registerEmail,
         handleSubmitEmail,

@@ -1,20 +1,19 @@
 import { obtenerSubastasPasadas } from "@/services/obtenerSubastasPasadas";
-import { useUI } from "../../hooks";
+import { useNotistack, useUI } from "@/hooks";
 import { useProductsOffersPassedStore } from "@/store/useProductsOffersPassedStore";
 
 export const useProductListClosed = () => {
-    const { setLoading, isLoading, setError, error, data, setData } = useProductsOffersPassedStore();
+    const { showNotyError } = useNotistack();
+    const { setLoading, isLoading, data, setData } = useProductsOffersPassedStore();
     const { strings } = useUI();
 
     const onListar = async () => {
         setLoading(true);
-        setError(null);
         try {
             const data = await obtenerSubastasPasadas();
-            console.log(data);
             setData(data);
         } catch (error) {
-            setError("Error al cargar las subastas");
+            showNotyError({ error: (error as any).message });
         } finally {
             setLoading(false);
         }
@@ -22,7 +21,6 @@ export const useProductListClosed = () => {
 
     return {
         isLoading,
-        error,
         data,
         onListar,
         strings

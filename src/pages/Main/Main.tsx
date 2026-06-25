@@ -6,7 +6,7 @@ import { Loading } from "@/components/Loading/Loading";
 import { Layout } from "@/components/Layout/Layout";
 
 export const Main = () => {
-    const { strings, handleGoTo, isLoading/* , error */ } = useMain();
+    const { strings, handleGoTo, isLoading } = useMain();
 
     return (
         <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS">

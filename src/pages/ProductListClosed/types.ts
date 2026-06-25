@@ -27,5 +27,5 @@ export interface ProductOffers {
     productosDetalle: ProductDetails[];
     ofertas: Offers[];             // array de ofertas
     mejorOferta: Offers[];         // array de ofertas
-    momentoCierre: string;         // ej: "168 day(s) 19 hour(s) 4 minute(s)"
+    momentoCierre: string | null;         // ej: "168 day(s) 19 hour(s) 4 minute(s)"
 }

@@ -5,10 +5,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginRequest } from '@/schemas/login.schema';
 import { useAuthStore } from "@/store/useAuthStore";
 import { loginService } from "@/services/loginService";
+import { useNotistack } from "@/hooks";
 
 export const useLogin = () => {
+    const { showNotyError } = useNotistack();
     const navigate = useNavigate();
-    const { login, setLoading, setError, isLoading : loadingLogin, error } = useAuthStore();
+    const { login, setLoading, isLoading: loadingLogin } = useAuthStore();
 
     const {
         register,
@@ -23,15 +25,14 @@ export const useLogin = () => {
     const handleGoForgotPassword = () => navigate(rutas.FORGOT_PASSWORD);
 
     const handleLogin = async (payload: LoginRequest) => {
-        setError(null);
-        setLoading(true);  
+        setLoading(true);
         try {
             const { token, expiresAt, user } = await loginService(payload);
             const expirationDate = new Date(expiresAt).getTime();
             login(user, token, expirationDate);
             navigate(rutas.MAIN);
         } catch (error: any) {
-            setError(error.msg || 'Error al iniciar sesión');
+            showNotyError({ error: (error as any).msg });
         } finally {
             setLoading(false);
         }
@@ -46,7 +47,6 @@ export const useLogin = () => {
         register,
         errors,
         isSubmitting,
-        isValid,
-        error
+        isValid
     };
 };

@@ -1,12 +1,13 @@
 import { obtenerSubastasActivas } from "@/services/obtenerSubastasActivas.js";
-import { useUI } from "../../hooks";
+import { useNotistack, useUI } from "../../hooks";
 import { useProductsOffersStore } from "@/store/useProductsOffersStore";
 import { ProductOffers } from "./types";
 import { useSubastasStore } from "@/store/useSubastasStore";
 import { useEffect } from "react";
 
 export const useProductList = () => {
-    const { setLoading, isLoading, setError, error, data, setData, selected, setSelected } = useProductsOffersStore();
+    const { showNotyError } = useNotistack();
+    const { setLoading, isLoading, /* setError, error, */ data, setData, selected, setSelected } = useProductsOffersStore();
     const { readme, setReadme, handleAddOffer } = useSubastasStore();
     const { strings } = useUI();
 
@@ -33,16 +34,16 @@ export const useProductList = () => {
 
     const onListar = async () => {
         setLoading(true);
-        setError(null);
         try {
             const data = await obtenerSubastasActivas();
             const dataWithMomentoCierre = data.map((subasta: ProductOffers) => ({
                 ...subasta,
                 momentoCierre: getStringMomentoCierre(subasta.fechaHoraFinRaw, strings.PAGE_PRODUCTLIST_MOMENTO_CIERRE)
             }));
+            console.log(dataWithMomentoCierre);
             setData(dataWithMomentoCierre);
         } catch (error) {
-            setError("Error al cargar las subastas");
+            showNotyError({ error: (error as Error).message });
         } finally {
             setLoading(false);
         }
@@ -63,7 +64,6 @@ export const useProductList = () => {
 
     return {
         isLoading,
-        error,
         data,
         onListar,
         strings,

@@ -1,5 +1,4 @@
 export * from './BackButton/BackButton';
-export * from './BlockVacio/BlockVacio';
 export * from './ButtonForm/ButtonForm';
 export * from './ButtonMain/ButtonMain';
 export * from './ButtonIcon/ButtonIcon';

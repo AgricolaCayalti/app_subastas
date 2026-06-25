@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack'; // <--- Importa esto
 import App from './App';
 import './assets/fonts/montserrat/stylesheet.css';
 import './index.css';
@@ -15,7 +16,12 @@ const createApp = (): void => {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <HashRouter>
-        <App />
+        <SnackbarProvider
+          maxSnack={3} // Máximo de toasts visibles a la vez
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // Posición
+        >
+          <App />
+        </SnackbarProvider>
       </HashRouter>
     </React.StrictMode>
   );

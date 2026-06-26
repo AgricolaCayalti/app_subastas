@@ -13,7 +13,7 @@ export const useLogin = () => {
     const { login, setLoading, isLoading: loadingLogin } = useAuthStore();
 
     const {
-        register,
+        control,
         handleSubmit,
         formState: { errors, isSubmitting, isValid },
     } = useForm<LoginRequest>({
@@ -36,17 +36,17 @@ export const useLogin = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     return {
-        handleGoSignUp,
-        handleGoForgotPassword,
-        handleSubmit,
         handleLogin,
+        handleGoForgotPassword,
+        handleGoSignUp,
         loadingLogin,
-        register,
-        errors,
+        handleSubmit,
+        control,
         isSubmitting,
-        isValid
+        isValid,
+        errors
     };
 };

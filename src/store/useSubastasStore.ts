@@ -2,30 +2,24 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface SubastasState {
-    // Estado
-    readmeIds: number[];               // IDs de las subastas ya "leídas"
+    readmeIds: number[];
     readme: boolean;
-
-    // Acciones
     addReadmeId: (id: number) => void;
     setReadme: (readme: boolean) => void;
-    handleAddOffer: (item: any) => void;  // la lógica completa
+    handleAddOffer: (item: any) => void;
 }
 
 export const useSubastasStore = create<SubastasState>()(
     persist(
-        (set, get) => ({
+        (set) => ({
             readmeIds: [],
             readme: false,
             addReadmeId: (id) =>
                 set((state) => ({
                     readmeIds: [...state.readmeIds, id],
-                })),
-            setReadme: (readme: boolean) =>
-                set((state) => ({
-                    readme,
-                })),
-
+                })
+            ),
+            setReadme: (readme: boolean) => (set({ readme })),
             handleAddOffer: (item) => {
                 set((state) => {
                     const esDeboMostrar = !state.readmeIds.includes(item.id);

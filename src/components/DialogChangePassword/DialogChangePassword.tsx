@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -41,9 +40,13 @@ export const DialogChangePassword = () => {
                             name="newPassword"
                             control={control}
                             disabled={isLoading}
+
                             render={({ field }) => (
                                 <div>
-                                    <InputPassword {...field} label="Nueva contraseña" />
+                                    <InputPassword
+                                        {...field}
+                                        label="Nueva contraseña"
+                                    />
                                     {errors.newPassword && (
                                         <p className="text-sm text-red-500 mt-1">{errors.newPassword.message}</p>
                                     )}
@@ -69,7 +72,6 @@ export const DialogChangePassword = () => {
                         <ButtonForm type="submit" bgColor="terciary" disabled={isLoading}>
                             {isLoading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}
                         </ButtonForm>
-                        {/* <Button type="submit" disabled={isLoading}>{isLoading ? strings.LOADING : strings.PAGE_FORGOTPASSWORD_BTN_CAMBIAR_CLAVE}</Button> */}
                     </DialogFooter>
                 </form>
             </DialogContent>

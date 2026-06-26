@@ -3,7 +3,7 @@ export * from './ButtonForm/ButtonForm';
 export * from './ButtonMain/ButtonMain';
 export * from './ButtonIcon/ButtonIcon';
 export * from './InputForm/InputForm';
-export * from './InputLogin/InputLogin';
+export * from './InputLogin/Input';
 export * from './InputFormMoney/InputFormMoney';
 export * from './LinearLoader/LinearLoader';
 export * from './ProfileButton/ProfileButton';

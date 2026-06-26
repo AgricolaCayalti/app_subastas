@@ -1,10 +1,11 @@
-import { ButtonMain, CircularLoader, InputLogin, Switch } from "@/components";
+import { ButtonMain, CircularLoader, Input, Switch } from "@/components";
 import Logo from "@/assets/yarabamba-logo.png";
 import LogosLogin from "@/assets/logos-login.png";
 import { FaLock, FaUser } from "react-icons/fa";
 import { useLogin } from "@/pages/Login/useLogin";
 import { useUI } from "@/hooks";
 import { Loading } from "@/components/Loading/Loading";
+import { Controller } from "react-hook-form";
 
 export const Login = () => {
     const { strings, language, onSetLanguage, languages } = useUI();
@@ -14,8 +15,7 @@ export const Login = () => {
         handleGoSignUp,
         loadingLogin,
         handleSubmit,
-        register,
-        errors
+        control
     } = useLogin();
 
     return (
@@ -50,24 +50,37 @@ export const Login = () => {
                     <h4 className="text-primary-800 font-medium text-center text-lg sm:text-xl">
                         {strings.PAGE_LOGIN_INICIAR_SESION}
                     </h4>
-                    <InputLogin
-                        icon={<FaUser />}
-                        label={strings.PAGE_LOGIN_USUARIO}
-                        placeholder="Ej: user@cayalti.com"
-                        required
-                        registration={register('username')}   // ← pasamos el resultado
-                        errorMessage={errors.username?.message}
+                    <Controller
+                        name="username"
+                        control={control}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                {...field}
+                                required
+                                icon={<FaUser />}
+                                label={strings.PAGE_LOGIN_USUARIO}
+                                placeholder="Ej: user@cayalti.com"
+                                errorMessage={fieldState.error?.message}
+                            />
+                        )}
                     />
 
-                    <InputLogin
-                        icon={<FaLock />}
-                        type="password"
-                        label={strings.PAGE_LOGIN_CONTRASENA}
-                        placeholder="Ej: Clave147"
-                        required
-                        registration={register('password')}
-                        errorMessage={errors.password?.message}
+                    <Controller
+                        name="password"
+                        control={control}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                {...field}
+                                required
+                                type="password"
+                                icon={<FaLock />}
+                                label={strings.PAGE_LOGIN_CONTRASENA}
+                                placeholder="Ej: *****************"
+                                errorMessage={fieldState.error?.message}
+                            />
+                        )}
                     />
+
 
                     <ButtonMain
                         bgColor="secondary"

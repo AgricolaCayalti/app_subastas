@@ -1,13 +1,12 @@
 import { z } from 'zod';
 
 export const registerSchema = z.object({
-    razon_social: z
-        .string()
-        .min(3, 'La razón social debe tener al menos 3 caracteres')
-        .max(100, 'La razón social no puede exceder los 100 caracteres'),
+    
     numero_documento: z.string()
         .min(8, 'El número de documento debe tener al menos 8 dígitos')
-        .max(15, 'El número de documento no puede exceder los 11 dígitos'),
+        .max(11, 'El número de documento no puede exceder los 11 dígitos'),
+    razon_social: z
+        .string(),
 
     correo: z
         .email('Debe ser un correo electrónico válido')
@@ -36,17 +35,21 @@ export const registerSchema = z.object({
         .max(15, 'El teléfono no puede exceder los 15 dígitos')
         .regex(/^[0-9+\-() ]+$/, 'El teléfono contiene caracteres inválidos'),
 })
-.refine((data) => data.password === data.confirm_password, {
-    message: 'Las contraseñas no coinciden',
-    path: ['confirm_password'],
-});
+    .refine((data) => data.password === data.confirm_password, {
+        message: 'Las contraseñas no coinciden',
+        path: ['confirm_password'],
+    });
 
 export type RegisterForm = z.infer<typeof registerSchema>;
-/* 
-"razon_social": "EMRPESA ABC",
-    "numero_documento": "10468562591",
-    "correo": "soulaldo1991@gmail.com",
-    "username" : "soulaldo1991@gmail.com",
-    "password": "123456789",
-    "nombre_contacto" : "CARLOS ENRIQUE",
-    "telefono" : "954927482" */
+
+
+export type RegisterRequest = {
+    razon_social: string;
+    numero_documento: string;
+    correo: string;
+    username: string;
+    password: string;
+    nombre_contacto: string;
+    telefono: string;
+};
+

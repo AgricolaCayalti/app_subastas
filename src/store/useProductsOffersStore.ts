@@ -1,14 +1,13 @@
-// store/usePasswordChangeStore.ts
 import { create } from 'zustand';
-import { ProductOffers } from '../pages/ProductList/types';
+import { ProductOffersActive } from '@/components/ProductOffers/types';
 
 interface UseProductsOffersStore {
-    data: ProductOffers[],
-    selected: ProductOffers | null,
+    selected: ProductOffersActive | null,
+    data: ProductOffersActive[],
     isLoading: boolean;
-    setData: (data: ProductOffers[]) => void;
+    setData: (data: ProductOffersActive[]) => void;
     setLoading: (loading: boolean) => void;
-    setSelected: (selected: ProductOffers | null) => void;
+    setSelected: (selected: ProductOffersActive | null) => void;
     reset: () => void;
 }
 

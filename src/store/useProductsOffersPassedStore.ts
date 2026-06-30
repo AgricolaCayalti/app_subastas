@@ -1,6 +1,5 @@
-// store/usePasswordChangeStore.ts
-import { ProductOffers } from '@/pages/ProductListClosed/types';
 import { create } from 'zustand';
+import { ProductOffers } from '@/components/ProductOffers/types';
 
 interface UseProductsOffersPassedStore {
     data: ProductOffers[],

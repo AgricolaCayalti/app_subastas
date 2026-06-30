@@ -6,13 +6,15 @@ import { Icon } from "./Icon";
 import { InputForm } from "./InputForm";
 
 interface InputProps {
+    disabled?: boolean;
     icon: React.ReactNode;
     label: string;
+    labelView?: boolean;
     name?: string;
     type?: string;
     required?: boolean;
     placeholder?: string;
-    value: string;
+    value?: string;
     onChange: (value: string) => void;
     errorMessage?: string;
 }
@@ -21,6 +23,7 @@ interface InputProps {
 export const Input = ({
     icon,
     label,
+    labelView = true,
     name,
     type = "text",
     required,
@@ -28,6 +31,7 @@ export const Input = ({
     value = "",
     onChange,
     errorMessage,
+    disabled = false
 }: InputProps) => {
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -64,17 +68,21 @@ export const Input = ({
                     active={active}
                     hasError={hasError}
                     setIsFocused={setIsFocused}
-
+                    disabled={disabled}
+                    labelView={labelView}
                 />
+                {
+                    labelView &&
 
-                <Label
-                    inputId={inputId}
-                    active={active}
-                    icon={icon}
-                    hasError={hasError}
-                    label={label}
-                    required={required}
-                />
+                    <Label
+                        inputId={inputId}
+                        active={active}
+                        icon={icon}
+                        hasError={hasError}
+                        label={label}
+                        required={required}
+                    />
+                }
 
                 <ButtonInlineEnd
                     handleClear={handleClear}
@@ -83,6 +91,7 @@ export const Input = ({
                     isPassword={isPassword}
                     showPassword={showPassword}
                     setShowPassword={setShowPassword}
+                    disabled={disabled}
                 />
             </div>
 

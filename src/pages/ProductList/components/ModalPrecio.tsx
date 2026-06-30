@@ -3,43 +3,38 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
-import { InputFormMoney } from '@/components/InputFormMoney/InputFormMoney';
-import { ButtonForm, LinearLoader, Space } from '@/components';
+import { ButtonForm, Input } from '@/components';
 import { useModalPrecio } from '../useModalPrecio';
-import { useNotistack, useUI } from '@/hooks';
+import { useUI } from '@/hooks';
 import { useProductList } from '../useProductList';
 import bgImage from '../../../assets/background-option2.png';
-// Importar desde shadcn/ui (asegúrate de que la ruta sea correcta)
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { ProductDetails } from '@/components/ProductOffers/types';
 
-// ---------- Tipos y esquema dinámico ----------
-type ProductoDetalle = {
-    id: number;
-    idProducto: number;
-    descripcion: string;
-    cantidadKg: string;
-    precioBaseKg: number;
-};
 
-const generarEsquemaPrecios = (productos: ProductoDetalle[]) => {
+const generarEsquemaPrecios = (productos: ProductDetails[]) => {
     const shape: Record<string, z.ZodTypeAny> = {};
     productos.forEach((p) => {
         shape[`precio_ofertado_${p.id}`] = z
-            .number({ invalid_type_error: 'Ingresa un número válido' })
+            .coerce.number('Ingresa un número válido')
             .min(0, 'Mínimo 0')
-            .max(99.99, 'Máximo 99.99');
+            .max(999.99, 'Máximo 999.99') // Ajusta este tope a tu necesidad
+            .refine(
+                (val) => Number.isInteger(val * 100),
+                { message: 'Solo se permiten 2 decimales' }
+            );
     });
     return z.object(shape);
 };
 
 type FormPrecios = z.infer<ReturnType<typeof generarEsquemaPrecios>>;
 
-export const ModalPrecio = ({ onListarSubastas }) => {
-    const { selected: seleccionado, onSelected: setSeleccionado, onClosed } = useProductList();
+export const ModalPrecio = () => {
+    const { selected: seleccionado, onClosed, onListar } = useProductList();
     const formRef = useRef<HTMLFormElement>(null);
-    const { loading: isRegistrando, data, onRegistrar } = useModalPrecio();
+    const { loading: isRegistrando, onRegistrar } = useModalPrecio();
     const { strings } = useUI();
-    const { showNotyError } = useNotistack();
+
 
     const schema = generarEsquemaPrecios(seleccionado?.productosDetalle ?? []);
     const {
@@ -47,7 +42,7 @@ export const ModalPrecio = ({ onListarSubastas }) => {
         handleSubmit,
         watch,
         reset,
-        formState: { errors, isSubmitting },
+        formState: { isSubmitting },
     } = useForm<FormPrecios>({
         resolver: zodResolver(schema),
         defaultValues: {},
@@ -61,7 +56,7 @@ export const ModalPrecio = ({ onListarSubastas }) => {
             const ofertaAnterior = seleccionado.miUltimaOferta?.detalles?.find(
                 (d) => d.idProducto === p.idProducto
             );
-            defaultVals[`precio_ofertado_${p.id}`] = ofertaAnterior?.precioOfertado ?? 0;
+            defaultVals[`precio_ofertado_${p.id}`] = Number(ofertaAnterior?.precioOfertado) || 0;
         });
         reset(defaultVals);
     }, [seleccionado, reset]);
@@ -74,7 +69,7 @@ export const ModalPrecio = ({ onListarSubastas }) => {
         let totalIngresos = 0;
         for (const p of seleccionado.productosDetalle) {
             const precio = Number(formValues[`precio_ofertado_${p.id}`] ?? 0);
-            const cantidad = parseFloat(p.cantidadKg.replaceAll(',', ''));
+            const cantidad = parseFloat(p.cantidadKg.replace(/,/g, ''));
             totalCantidad += cantidad;
             totalIngresos += cantidad * precio;
         }
@@ -90,24 +85,23 @@ export const ModalPrecio = ({ onListarSubastas }) => {
 
     // Submit
     const onSubmit = (data: FormPrecios) => {
+
         const preciosOfertados = seleccionado?.productosDetalle.map((p) => ({
             idProducto: p.idProducto,
-            precioOfertadoKg: data[`precio_ofertado_${p.id}`] ?? 0,
+            precioOfertadoKg: data[fieldId(p.id)] ?? 0,
         }));
-        
 
         onRegistrar({
             idProductoOfertado: seleccionado?.id ?? 0,
             preciosOfertados: preciosOfertados ?? [],
         });
+        onListar();
+        handleClose();
     };
 
-    // Cerrar al registrar exitosamente
-    useEffect(() => {
-        if (!data) return;
-        handleClose();
-        onListarSubastas();
-    }, [data]);
+    const fieldId = (id: number) => `precio_ofertado_${id}`;
+
+    
 
     // Control de apertura
     const open = !!seleccionado;
@@ -118,8 +112,7 @@ export const ModalPrecio = ({ onListarSubastas }) => {
             onOpenChange={(open) => !open && handleClose()}
         >
             <DialogContent
-                className="bg-white text-primary rounded-lg shadow-xl w-11/12 max-w-4xl mx-auto p-4 md:p-6 overflow-y-auto max-h-[90vh] bg-no-repeat bg-contain bg-top [&>button]:hidden"
-                style={{ backgroundImage: `url(${bgImage})` }}
+                className="bg-white text-primary rounded-lg shadow-xl w-11/12 max-w-4xl mx-auto p-4 md:p-6 overflow-y-auto max-h-[90vh] bg-no-repeat bg-contain bg-top [&>button]:hidden background-modal"
             >
                 {/* El formulario ahora solo tiene la estructura, sin estilos repetidos */}
                 <form
@@ -149,17 +142,18 @@ export const ModalPrecio = ({ onListarSubastas }) => {
                     </div>
 
                     <p className="font-semibold text-primary text-lg">NUEVO REQUERIMIENTO</p>
-
+                    {/* <pre>{JSON.stringify(seleccionado?.productosDetalle, null, 3)}</pre> */}
                     {/* Lista de productos */}
                     <div className="text-sm md:text-base overflow-y-auto max-h-[50vh] mt-2">
-                        {seleccionado?.productosDetalle?.map((productoDetalle, i) => {
+                        {seleccionado?.productosDetalle?.map((productoDetalle, index) => {
                             const ofertaProductoOfertador = seleccionado?.miUltimaOferta?.detalles?.find(
-                                (item) => item.idProducto === productoDetalle.idProducto
+                                (item: any) => item.idProducto == productoDetalle.idProducto
                             );
                             const fieldName = `precio_ofertado_${productoDetalle.id}`;
 
                             return (
-                                <div key={productoDetalle.id} className="mb-4">
+                                <div key={index} className="mb-4">
+                                    <pre>{JSON.stringify(ofertaProductoOfertador, null, 2)}</pre>
                                     <div className="flex flex-col gap-1">
                                         <div className="text-lg font-medium">{productoDetalle?.descripcion}</div>
                                         <div>
@@ -169,7 +163,7 @@ export const ModalPrecio = ({ onListarSubastas }) => {
                                             {strings.PAGE_PRODUCTLIST_PRECIO_BASE}: {productoDetalle.precioBaseKg}
                                             {Boolean(ofertaProductoOfertador) && (
                                                 <span className="text-terciary ml-1">
-                                                    (Yo {ofertaProductoOfertador.precioOfertado})
+                                                    (Yo {ofertaProductoOfertador?.precioOfertado})
                                                 </span>
                                             )}
                                         </div>
@@ -179,31 +173,18 @@ export const ModalPrecio = ({ onListarSubastas }) => {
                                         name={fieldName}
                                         control={control}
                                         render={({ field, fieldState }) => (
-                                            <>
-                                                <InputFormMoney
-                                                    icon={<FaRegMoneyBillAlt />}
-                                                    required
-                                                    disabled={isRegistrando || isSubmitting}
-                                                    imperativeAutofocus={i === 0}
-                                                    onClick={(e) => e.target.select()}
-                                                    value={field.value ?? ''}
-                                                    onChange={(e) => {
-                                                        const raw = e.target.value.replaceAll(',', '');
-                                                        const num = parseFloat(raw);
-                                                        field.onChange(isNaN(num) ? 0 : num);
-                                                    }}
-                                                    onBlur={field.onBlur}
-                                                    ref={field.ref}
-                                                />
-                                                {fieldState.error && (
-                                                    <div className="text-red-500 text-xs mt-1">
-                                                        {fieldState.error.message}
-                                                    </div>
-                                                )}
-                                            </>
+                                            <Input
+                                                {...field}
+                                                value={field.value?.toString() ?? ''}
+                                                onChange={(value) => field.onChange(value)} // Extrae el valor del evento
+                                                icon={<FaRegMoneyBillAlt />}
+                                                labelView={false}
+                                                label="0.00"
+                                                placeholder="0.00"
+                                                errorMessage={fieldState.error?.message}
+                                            />
                                         )}
                                     />
-                                    <Space height={5} />
                                     <hr className="border-gray-200" />
                                 </div>
                             );
@@ -222,19 +203,15 @@ export const ModalPrecio = ({ onListarSubastas }) => {
                             <div className="flex-1 flex justify-between items-center w-full sm:w-auto">
                                 <span className="font-bold">{strings.PAGE_PRODUCTLIST_PRECIO_OFERTADO}</span>
                                 <span className="text-2xl font-semibold text-secondary">
-                                    {precioPonderado}
+                                    PEN {precioPonderado}
                                 </span>
                             </div>
                         </div>
 
                         <div className="mt-4 flex justify-center">
-                            {isRegistrando || isSubmitting ? (
-                                <LinearLoader color="terciary" />
-                            ) : (
-                                <ButtonForm type="submit" bgColor="terciary" disabled={isRegistrando || isSubmitting}>
-                                    {strings.PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_BTN_GUARDAR} 
-                                </ButtonForm>
-                            )}
+                            <ButtonForm type="submit" bgColor="terciary" disabled={isRegistrando || isSubmitting}>
+                                {strings.PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_BTN_GUARDAR}
+                            </ButtonForm>
                         </div>
                     </div>
                 </form>
@@ -242,3 +219,4 @@ export const ModalPrecio = ({ onListarSubastas }) => {
         </Dialog>
     );
 };
+

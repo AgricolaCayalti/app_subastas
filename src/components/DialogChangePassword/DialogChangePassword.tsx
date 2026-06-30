@@ -7,9 +7,10 @@ import {
     DialogHeader,
     DialogTitle
 } from "@/components/ui/dialog";
-import { InputPassword } from '../Input/InputPassword';
 import { useDialogChangePassword } from './useDialogChangePassword';
 import { ButtonForm } from '../ButtonForm/ButtonForm';
+import { Input } from '../Input/Input';
+import { FaLock } from 'react-icons/fa6';
 
 export const DialogChangePassword = () => {
     const {
@@ -36,7 +37,7 @@ export const DialogChangePassword = () => {
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onFormSubmit)}>
                     <div className="space-y-4">
-                        <Controller
+                        {/* <Controller
                             name="newPassword"
                             control={control}
                             disabled={isLoading}
@@ -64,6 +65,37 @@ export const DialogChangePassword = () => {
                                         <p className="text-sm text-red-500 mt-1">{errors.confirmPassword.message}</p>
                                     )}
                                 </div>
+                            )}
+                        /> */}
+                        <Controller
+                            name="newPassword"
+                            control={control}
+                            render={({ field, fieldState }) => (
+                                <Input
+                                    {...field}
+                                    required
+                                    type="password"
+                                    icon={<FaLock />}
+                                    label={strings.PAGE_SIGNUP_CONTRASENA}
+                                    placeholder="Ej: *****************"
+                                    errorMessage={fieldState.error?.message}
+                                />
+                            )}
+                        />
+
+                        <Controller
+                            name="confirmPassword"
+                            control={control}
+                            render={({ field, fieldState }) => (
+                                <Input
+                                    {...field}
+                                    required
+                                    type="password"
+                                    icon={<FaLock />}
+                                    label={strings.PAGE_SIGNUP_CONFIRMAR_CONTRASENA}
+                                    placeholder="Ej: *****************"
+                                    errorMessage={fieldState.error?.message}
+                                />
                             )}
                         />
                     </div>

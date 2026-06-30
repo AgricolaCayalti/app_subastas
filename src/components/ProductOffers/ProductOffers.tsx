@@ -1,18 +1,18 @@
 import { Product } from "./Product";
 import { NotFound } from "../NotFound/NotFound";
-import { ProductOffers as ProductOffersType } from "./types";
+import { ProductOffers as ProductOffersType, ProductOffersActive } from "@/components/ProductOffers/types";
 
-interface ProductOffersProps { 
-    registros: ProductOffersType[]; 
-    title?: string; 
-    handleAddOffer?: (subasta: ProductOffersType) => void 
+interface ProductOffersProps {
+    registros: ProductOffersActive[] | ProductOffersType[];
+    title?: string;
+    handleAddOffer?: (subasta: ProductOffersActive) => void
 }
 
-export const ProductOffers : React.FC<ProductOffersProps> = (
-    { 
-        registros = [], 
-        title = "No hay ofertas para mostrar", 
-        handleAddOffer 
+export const ProductOffers: React.FC<ProductOffersProps> = (
+    {
+        registros = [],
+        title = "No hay ofertas para mostrar",
+        handleAddOffer
     }
 ) => {
     if (!registros.length) {
@@ -22,8 +22,9 @@ export const ProductOffers : React.FC<ProductOffersProps> = (
     return (
         <div>
             {
-                registros.map((subasta: ProductOffersType, index: number) => <Product key={index} item={subasta} handleAddOffer={handleAddOffer} />)
-
+                registros.map((subasta: ProductOffersType | ProductOffersActive, index: number) =>
+                    <Product key={index} item={subasta} handleAddOffer={handleAddOffer} />
+                )
             }
         </div>
     );

@@ -1,30 +1,30 @@
 import { FaPlus } from 'react-icons/fa';
 import { CollapsibleSubProductNative } from './CollapsibleSubProductNative';
 import { CollapsibleIndications } from './CollapsibleIndications';
-import { ProductOffers } from './types';
+import { ProductOffers, ProductOffersActive } from "@/components/ProductOffers/types";
 import { MyOffers } from '@/components/MyOffers/MyOffers';
 import { ProductDetail } from '@/store/useProductDetailStore';
 import { useProduct } from './useProduct';
 
 interface ProductProps {
-    item: ProductOffers;
-    handleAddOffer?: (item: ProductOffers) => void;
+    item: ProductOffers | ProductOffersActive;
+    handleAddOffer?: (item: ProductOffersActive) => void;
 }
 
 export const Product = ({ item, handleAddOffer }: ProductProps) => {
     const { productDetailData, bestOffersData, strings } = useProduct(item);
 
     return (
-        <div className="flex flex-row justify-between text-base py-2 border-b border-white text-[var(--primary)]">
-            <div className="relative w-full rounded-2xl mb-4 px-4 pb-6 pt-4 bg-no-repeat bg-contain bg-left shadow-[3px_2px_5px_0px_var(--gray)]"
-                style={{ backgroundImage: "url('../../../assets/background-option.png')" }}>
+        <div className="flex flex-row justify-between text-base py-2 text-primary mx-6 ">
+            <div className="relative w-full rounded-2xl p-4  shadow-[3px_2px_5px_0px_var(--gray)] bg-white background-modal "
+                >
 
                 <div className="flex justify-between items-start gap-4">
-                    <div className="text-2xl text-[var(--secondary)] font-medium">
+                    <div className="text-2xl text-secondary font-medium">
                         {strings.COMMON_SUBASTA_TITULO.replace(":0", item.descripcion)}
                     </div>
                     {
-                        handleAddOffer && (
+                        handleAddOffer && 'momentoCierre' in item && (
                             <button
                                 onClick={() => { handleAddOffer(item) }}
                                 className="flex items-center gap-1.5 min-h-[44px] min-w-[150px] p-2 rounded-2xl border-0 bg-[var(--terciary)] text-[var(--white)] cursor-pointer text-sm font-semibold font-sans hover:opacity-75 shrink-0"
@@ -72,7 +72,7 @@ export const Product = ({ item, handleAddOffer }: ProductProps) => {
                 )}
 
                 {
-                    handleAddOffer && (
+                    handleAddOffer && 'momentoCierre' in item && (
                         <div className="text-[var(--terciary)] font-semibold text-sm mt-2">
                             <b>{strings.PAGE_PRODUCTLIST_CERRADA_EN}:</b> {item.momentoCierre}
                         </div>

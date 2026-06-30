@@ -1,16 +1,8 @@
 import { httpClient } from "@/api/httpClient";
-import { PayloadInsertOferta } from "@/pages/ProductList/types";
-
-interface InsertOfertaRequest {
-    idProductoOfertado: string;
-    preciosOfertados: Array<{
-        idProducto: string;
-        precioOfertadoKg: number;
-    }>;
-}
+import { PayloadInsertOferta } from "@/components/ProductOffers/types";
 
 export const insertOferta = async (payload: PayloadInsertOferta) => {
-    const { data } = await httpClient.post(
+    await httpClient.post(
         `/comprador-ofertas`, {
             codigo_de_subasta : payload.idProductoOfertado,
             productos_ofertados: payload.preciosOfertados.map( item => ({
@@ -19,5 +11,4 @@ export const insertOferta = async (payload: PayloadInsertOferta) => {
             }))
         }
     );
-    return data;
 };

@@ -14,8 +14,7 @@ export const useLogin = () => {
 
     const {
         control,
-        handleSubmit,
-        formState: { errors, isSubmitting, isValid },
+        handleSubmit
     } = useForm<LoginRequest>({
         resolver: zodResolver(loginSchema),
         mode: 'onChange'
@@ -44,9 +43,6 @@ export const useLogin = () => {
         handleGoSignUp,
         loadingLogin,
         handleSubmit,
-        control,
-        isSubmitting,
-        isValid,
-        errors
+        control
     };
 };

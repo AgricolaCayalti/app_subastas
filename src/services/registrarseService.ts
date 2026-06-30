@@ -1,8 +1,7 @@
 import { httpClient } from "@/api/httpClient";
+import { RegisterRequest } from "@/schemas/register.schema";
 
-const APP_KEY = import.meta.env.VITE_APP_KEY;
-
-export const registrarseService = async (payload) => {
+export const registrarseService = async (payload: RegisterRequest) => {
     const { data } = await httpClient.post(`/registrar`, payload);
     return data.data;
 };

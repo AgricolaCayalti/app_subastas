@@ -1,22 +1,20 @@
 import { insertOferta } from "@/services/insertOferta.js";
 import { useState } from "react";
 import { useNotistack, useUI } from "../../hooks";
-import { PayloadInsertOferta } from "./types";
+import { PayloadInsertOferta } from "@/components/ProductOffers/types";
 
 export const useModalPrecio = () => {
-    const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const { strings } = useUI();
     const { showNotyOK, showNotyError } = useNotistack();
     const onRegistrar = async (payload: PayloadInsertOferta) => {
         setLoading(true);
         try {
-            const data = await insertOferta({
+            await insertOferta({
                 idProductoOfertado: payload.idProductoOfertado,
                 preciosOfertados: payload.preciosOfertados
             });
 
-            setData(data);
             showNotyOK({ message: strings.PAGE_PRODUCTLIST_OFERTA_REGISTRADA_OK })
         } catch (error) {
             showNotyError({ error: (error as any).msg })
@@ -26,8 +24,7 @@ export const useModalPrecio = () => {
     };
 
     return {
-        loading,
-        data,
+        loading, 
         onRegistrar
     }
 };

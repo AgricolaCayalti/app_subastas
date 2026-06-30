@@ -12,6 +12,8 @@ interface InputFormProps extends React.InputHTMLAttributes<HTMLInputElement> {
     active?: boolean;
     hasError?: boolean;
     setIsFocused: (focused: boolean) => void;
+    disabled?: boolean;
+    labelView?: boolean;
 }
 
 export const InputForm: React.FC<InputFormProps> = ({
@@ -25,7 +27,9 @@ export const InputForm: React.FC<InputFormProps> = ({
     isPassword,
     active,
     hasError,
-    setIsFocused
+    setIsFocused,
+    disabled,
+    labelView
 }) => {
     return (
         <input
@@ -34,14 +38,16 @@ export const InputForm: React.FC<InputFormProps> = ({
             required={required}
             placeholder={placeholder}
             autoComplete="off"
+            disabled={disabled}
             value={value}
             onChange={handleChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             className={clsx(
-                "peer w-full rounded-xl border-2 bg-white text-slate-800",
+                disabled ? 'bg-gray-200' : 'bg-white',
+                "peer w-full rounded-xl border-2  text-slate-800",
                 "transition-all duration-300 ease-out",
-                "placeholder:text-slate-400 placeholder:opacity-0 focus:placeholder:opacity-100",
+                labelView && "placeholder:text-slate-400 placeholder:opacity-0 focus:placeholder:opacity-100",
                 "hover:border-slate-300",
                 "focus:outline-none",
                 "py-3.5",

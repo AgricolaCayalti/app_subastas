@@ -1,4 +1,4 @@
-import { ButtonMain, CircularLoader, Input, Switch } from "@/components";
+import { ButtonMain, Input, Switch } from "@/components";
 import Logo from "@/assets/yarabamba-logo.png";
 import LogosLogin from "@/assets/logos-login.png";
 import { FaLock, FaUser } from "react-icons/fa";
@@ -20,7 +20,7 @@ export const Login = () => {
 
     return (
         <form
-            className="relative flex flex-col items-center justify-center h-full w-full login-background text-white px-4  sm:py-10"
+            className="relative flex flex-col items-center justify-center h-full w-full background-imglogin text-white px-4  sm:py-10"
             onSubmit={handleSubmit(handleLogin)}
         >
             {/* Overlay de carga */}
@@ -88,7 +88,7 @@ export const Login = () => {
                         type="submit"
                         className="mt-1"
                     >
-                        {loadingLogin ? <CircularLoader /> : strings.PAGE_LOGIN_BTN_INGRESAR}
+                        {strings.PAGE_LOGIN_BTN_INGRESAR}
                     </ButtonMain>
 
                     <span

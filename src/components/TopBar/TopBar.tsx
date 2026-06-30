@@ -21,14 +21,15 @@ export const TopBar = ({
     return (
         <header
             className={`
+                bg-[var(--${bgColor})]
                 fixed top-0 left-0 w-full z-50
                 h-14 sm:h-16 md:h-[72px]
                 grid grid-cols-3 items-center
                 px-4 sm:px-6
-                border-b border-[var(--gray-light)]/20
-                shadow-[0_2px_8px_rgba(0,0,0,0.08)]     
-                bg-[var(--${bgColor})]
-                 text-[var(--${ftColor})]
+                border-b 
+                shadow-[0_2px_8px_rgba(0,0,0,0.1)]     
+                
+                
                 ${className}
             `}
         >
@@ -38,7 +39,7 @@ export const TopBar = ({
                     <BackButton color={ftColor} aria-label="Volver atrás" />
                 )}
             </div>
-
+{/*   */}
             {/* Columna central: Título centrado */}
             <h3 className="
                             text-base sm:text-lg md:text-xl
@@ -48,7 +49,7 @@ export const TopBar = ({
                             break-words
                             px-2
                     ">
-                {title}
+                {/* {title} */} {bgColor}
             </h3>
 
             {/* Columna derecha: slot opcional */}

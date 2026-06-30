@@ -18,12 +18,6 @@ export const ProductListClosed = () => {
 
     return (
         <Layout title={strings.PAGE_PRODUCTLISTCLOSED_TITULO}>
-        {/* <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
-            <TopBar
-                title={strings.PAGE_PRODUCTLISTCLOSED_TITULO}
-                bgColor={"secondary"}
-                shouldShowBackBtn={true}
-            /> */}
             {isLoading ? (
                 <Loading />
             ) : (

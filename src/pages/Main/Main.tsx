@@ -9,10 +9,10 @@ export const Main = () => {
     const { strings, handleGoTo, isLoading } = useMain();
 
     return (
-        <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS">
-            {/* <div className="flex flex-col h-full justify-center background-gray background-imgmain">
-            <TopBar bgColor="white" ftColor="primary" title={strings.TITLE_PAGE_NAME} /> */}
-            <div className="flex flex-col gap-4 items-center mt-8 mb-8">
+        <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS" shouldShowBackBtn={false}>
+            {isLoading && <Loading />}
+            <div className="flex flex-col items-center justify-center space-y-10 my-40">
+                
                 <div className="login-box-logo">
                     <img
                         src={Logo}
@@ -38,7 +38,7 @@ export const Main = () => {
                     {strings.PAGE_MAIN_MIS_OFERTAS}
                 </ButtonMain>
             </div>
-            {isLoading && <Loading />}
+            
             <ProfileButton />
         </Layout>
     );

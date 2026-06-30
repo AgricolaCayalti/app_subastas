@@ -10,7 +10,6 @@ export const ProductList = () => {
     const {
         data: registros,
         isLoading,
-        onListar,
         strings,
         onSelected: setSeleccionado,
         readme,
@@ -18,13 +17,7 @@ export const ProductList = () => {
     } = useProductList();
 
     return (
-        <Layout title={strings.PAGE_PRODUCTLIST_TITULO}>
-            {/* <div className="flex flex-col h-full justify-start px-[18px] pt-[85px]">
-            <TopBar
-                title={strings.PAGE_PRODUCTLIST_TITULO}
-                bgColor={"secondary"}
-                shouldShowBackBtn={true}
-            /> */}
+        <Layout title={strings.PAGE_PRODUCTLIST_TITULO} bgColor="primary">
             {isLoading ? (
                 <Loading />
             ) : (
@@ -36,7 +29,7 @@ export const ProductList = () => {
             )}
 
             {
-                readme ? <Readme open={readme} onClose={() => setReadme(false)} /> : <ModalPrecio onListarSubastas={onListar} />
+                readme ? <Readme open={readme} onClose={() => setReadme(false)} /> : <ModalPrecio  />
             }
         </Layout>
     );

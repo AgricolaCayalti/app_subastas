@@ -9,35 +9,41 @@ interface ButtonInlineEndProps {
     isPassword: boolean;
     showPassword: boolean;
     setShowPassword: (showPassword: boolean) => void;
+    disabled?: boolean;
 }
 
-export const ButtonInlineEnd: React.FC<ButtonInlineEndProps> = ({ handleClear, active, value, isPassword, showPassword, setShowPassword }) => {
+export const ButtonInlineEnd: React.FC<ButtonInlineEndProps> = ({ handleClear, active, value, isPassword, showPassword, setShowPassword, disabled = false }) => {
     return (
         <React.Fragment>
-            <button
-                type="button"
-                onClick={handleClear}
-                className={clsx(
-                    "absolute",
-                    "top-1/2",
-                    "-translate-y-1/2",
-                    "flex", "items-center",
-                    "justify-center",
-                    "w-7",
-                    "h-7",
-                    "rounded-full",
-                    "transition-all",
-                    "duration-200",
-                    "hover:scale-110",
-                    "hover:text-red-500",
-                    "hover:bg-red-50",
-                    active ? "text-primary-500 bg-primary-50" : "text-red-900",
-                    !value && "opacity-0 pointer-events-none",
-                    isPassword ? "right-12" : "right-4"
-                )}
-            >
-                <FaTimes size={13} />
-            </button>
+            {
+                !disabled && (
+                    <button
+                        type="button"
+                        onClick={handleClear}
+                        className={clsx(
+                            "absolute",
+                            "top-1/2",
+                            "-translate-y-1/2",
+                            "flex", "items-center",
+                            "justify-center",
+                            "w-7",
+                            "h-7",
+                            "rounded-full",
+                            "transition-all",
+                            "duration-200",
+                            "hover:scale-110",
+                            "hover:text-red-500",
+                            "hover:bg-red-50",
+                            active ? "text-primary-500 bg-primary-50" : "text-red-900",
+                            !value && "opacity-0 pointer-events-none",
+                            isPassword ? "right-12" : "right-4"
+                        )}
+                    >
+                        <FaTimes size={13} />
+                    </button>
+                )
+            }
+
 
             {isPassword && (
                 <button

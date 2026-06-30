@@ -40,6 +40,10 @@
   background-image: url('./assets/background-main.png');
 }
 
+.background-modal {
+  background-image: url('./assets/background-option2.png');
+}
+
 html {
   height: 100%;
 }

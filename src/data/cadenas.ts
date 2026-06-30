@@ -40,7 +40,6 @@ const Cadenas = {
         PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_PRECIO_OFERTADO: "Ingrese Precio Ofertado",
         PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_BTN_GUARDAR: "GUARDAR",
         PAGE_PRODUCTLISTCLOSED_TITULO: "MIS OFERTAS",
-
         PAGE_FORGOTPASSWORD_INGRESE_CORREO: "Ingrese su correo registrado",
         PAGE_FORGOTPASSWORD_INGRESE_CORREO_DESCRIPCION : "Recibirás un código de verificación en tu correo electrónico.",
         PAGE_FORGOTPASSWORD_VALIDAR_CODIGO: "Ingresa el código enviado a tu correo",
@@ -48,7 +47,6 @@ const Cadenas = {
         PAGE_FORFOTPASSWORD_CAMBIAR_CLAVE: "Introduce tu nueva clave y confírmala",
         PAGE_FORFOTPASSWORD_CAMBIAR_CLAVE_DESCRIPCION: "Crea una nueva contraseña para tu cuenta.",
         PAGE_FORGFOTPASSWORD_RESEND_CODE : "Reenviar código al correo nuevamente",
-
 
         PAGE_FORGOTPASSWORD_CORREO: "Correo",
         PAGE_FORGOTPASSWORD_BTN_ENVIAR_CORREO: "ENVIAR CORREO",

@@ -5,4 +5,3 @@ export * from './ProductList/ProductList';
 export * from './ProductListClosed/ProductListClosed';
 export * from './SignUp/SignUp';
 export * from './TermsConditions/TermsConditions';
-export * from './Welcome/Welcome';

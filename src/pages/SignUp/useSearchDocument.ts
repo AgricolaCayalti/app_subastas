@@ -1,12 +1,8 @@
 
 import { RegisterForm } from "@/schemas/register.schema";
+import { consultarDNIRUCService } from "@/services/consultarDNIRUCService";
 import { useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
-
-const mockData = [
-    { id: '1', razon_social: 'Computer Soft SAC', documento: '10468562591', tipo: 2 },
-    { id: '2', razon_social: 'Aldo Guido Molocho Diaz', documento: '46856259', tipo: 1 },
-];
 
 export const useSearchDocument = (setValue: UseFormSetValue<RegisterForm>) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -16,14 +12,8 @@ export const useSearchDocument = (setValue: UseFormSetValue<RegisterForm>) => {
         setIsLoading(true);
         setError("");
         try {
-            const search = mockData.filter(item => item.documento.toString().trim() === numberDoocument.toString().trim());
-
-            if (search.length) {
-                const [{ razon_social }] = search;
-                setValue('razon_social', razon_social, { shouldValidate: true });
-            } else {
-                setError("Intenta con otro documento.");
-            }
+            const search = await consultarDNIRUCService(numberDoocument);
+            setValue('razon_social', search.ruc ? search.razon_social : `${search.nombres} ${search.ap_paterno} ${search.ap_materno}`, { shouldValidate: true });
         } catch (error: any) {
             setError((error as any).msg);
         } finally {

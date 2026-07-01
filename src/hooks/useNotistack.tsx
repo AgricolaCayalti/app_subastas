@@ -1,6 +1,6 @@
 import { useSnackbar } from "notistack";
 import { MdClose as CloseIcon } from 'react-icons/md';
-import { Constantes } from "@/data/constantes.js";
+import { Constantes } from "@/data/constantes";
 
 interface ShowNoty {
     text: string;

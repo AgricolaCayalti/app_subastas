@@ -22,19 +22,17 @@ import { useEffect, useState } from "react";
 
 export const useForgotPassword = () => {
     const { showNotyError, showConfirm } = useNotistack();
-    const { step, isLoading, setStep, setLoading, email, setEmail, expiredAt } = useForgotPasswordStore();
-    const [codeSent, setCodeSent] = useState<string>("");
+    const { step, isLoading, setStep, setLoading, email, setEmail, expiredAt, code, setCode, clear } = useForgotPasswordStore();
     const [timeLeft, setTimeLeft] = useState<string>("");
     const { strings } = useUI();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (step !== 1 || !expiredAt) return;
+        if (step < 1 || step > 2 || !expiredAt) return;
 
         const updateTimer = () => {
             const now = Date.now();
-            const expiry = new Date(expiredAt).getTime();
-            const diff = expiry - now;
+            const diff = expiredAt - now;
 
             if (diff <= 0) {
                 setTimeLeft('⏳ Código expirado');
@@ -47,7 +45,7 @@ export const useForgotPassword = () => {
             setTimeLeft(formatted);
             return 'ok';
         };
-
+        console.log("C");
         const initialStatus = updateTimer();
         if (initialStatus === 'expired') return;
 
@@ -63,8 +61,9 @@ export const useForgotPassword = () => {
         setLoading(true);
         try {
             const data = await enviarCorreoRecuperacionService(payload);
-            setStep(1, data.expiresAt);
-            setEmail(payload.correo);
+            const expiredAtTime = new Date(data.expiresAt).getTime();
+            setEmail(payload.correo, expiredAtTime);
+            setStep(1);
         } catch (error) {
             showNotyError({ error: (error as any).msg });
         } finally {
@@ -76,6 +75,7 @@ export const useForgotPassword = () => {
         setLoading(true);
         try {
             await validarCodigoRecuperacionService(payload);
+            setCode(payload.codigo);
             setStep(2);
         } catch (error) {
             showNotyError({ error: (error as any).msg });
@@ -84,12 +84,13 @@ export const useForgotPassword = () => {
         }
     }
 
+
     const onChangePassword = async (payload: ChangePasswordRequest) => {
         const confirmed = await showConfirm({
             message: '¿Estás seguro de cambiar tu contraseña?',
             confirmText: 'Sí',
             cancelText: 'No',
-            severity: 'info' 
+            severity: 'info'
         });
 
         if (confirmed) {
@@ -100,7 +101,10 @@ export const useForgotPassword = () => {
                 setEmail("");
                 navigate(rutas.LOGIN);
             } catch (error) {
+                console.log((error as any).code);
+
                 showNotyError({ error: (error as any).msg });
+
             } finally {
                 setLoading(false);
             }
@@ -111,6 +115,7 @@ export const useForgotPassword = () => {
         register: registerEmail,
         handleSubmit: handleSubmitEmail,
         formState: { errors: errorsEmail },
+        control: controlEmail,          // ✅ añadir
     } = useForm<SendRecoveryForm>({
         resolver: zodResolver(emailSchema),
         mode: 'onBlur',
@@ -120,6 +125,7 @@ export const useForgotPassword = () => {
         register: registerCode,
         handleSubmit: handleSubmitCode,
         formState: { errors: errorsCode },
+        control: controlCode,           // ✅ añadir
     } = useForm<ValidateCodeForm>({
         resolver: zodResolver(codeSchema),
         mode: 'onBlur',
@@ -128,40 +134,31 @@ export const useForgotPassword = () => {
     const {
         register: registerPassword,
         handleSubmit: handleSubmitPassword,
-        formState: { errors: errorsPassword }
+        formState: { errors: errorsPassword },
+        control: controlPassword,       // ✅ añadir
     } = useForm<ChangePasswordForm>({
         resolver: zodResolver(passwordSchema),
         mode: 'onBlur',
     });
 
-    const onEmailSubmit = (data: SendRecoveryForm) => {
-        onSendRecovery({ correo: data.correo });
-    };
 
-    const onCodeSubmit = (data: ValidateCodeForm) => {
-        onValidateCode({ correo: email, codigo: data.codigo });
-    };
 
     const onPasswordSubmit = (data: ChangePasswordForm) => {
         onChangePassword({
             correo: email,
-            codigo: codeSent,
+            codigo: code,
             clave: data.clave,
         });
     };
 
-    const handleResendCode = () => {
-        onSendRecovery({ correo: email });
-    };
+    
 
     const handleEmailSubmit = (data: SendRecoveryForm) => {
-        setEmail(data.correo);
-        onEmailSubmit(data);
+        onSendRecovery(data);
     };
 
     const handleCodeSubmit = (data: ValidateCodeForm) => {
-        setCodeSent(data.codigo);
-        onCodeSubmit(data);
+        onValidateCode({ correo: email, codigo: data.codigo });
     };
 
     return {
@@ -180,7 +177,12 @@ export const useForgotPassword = () => {
         onPasswordSubmit,
         handleEmailSubmit,
         handleCodeSubmit,
-        handleResendCode,
-        timeLeft
+        timeLeft,
+
+        controlEmail,
+        controlCode,
+        controlPassword,
+        clear,
+        expiredAt 
     }
 };

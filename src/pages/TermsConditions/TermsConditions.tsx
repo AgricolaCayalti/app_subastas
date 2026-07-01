@@ -16,7 +16,7 @@ export const TermsConditions = () => {
     return (
         <Layout title="TÉRMINOS Y CONDICIONES DE USO">
             <form
-                className="flex flex-col justify-center gap-3"
+                className="flex flex-col justify-center gap-3 m-7"
                 onSubmit={handleSubmit}
             >
                 <div className="text-primary text-justify">
@@ -49,13 +49,16 @@ export const TermsConditions = () => {
                         options={[]}
                     />
                 </div>
-                <ButtonForm
-                    disabled={!isChecked}
-                    bgColor="secondary"
-                    type="submit"
-                >
-                    {strings.PAGE_TERMSCONDITIONS_BTN_ACCEPT}
-                </ButtonForm>
+                <div className="mb-7">
+                    <ButtonForm
+                        disabled={!isChecked}
+                        bgColor="secondary"
+                        type="submit"
+                    >
+                        {strings.PAGE_TERMSCONDITIONS_BTN_ACCEPT}
+                    </ButtonForm>
+                </div>
+
             </form>
         </Layout>
     );

@@ -23,7 +23,7 @@ export const SignUp = () => {
     } = useForm();
 
     return <Layout>
-        <form className="space-y-4" onSubmit={handleSubmit(handleRegister)}>
+        <form className="space-y-4 m-7" onSubmit={handleSubmit(handleRegister)}>
             <h3>{strings.PAGE_SIGNUP_REGISTRATE}</h3>
             <div className="relative">
                 <Controller
@@ -35,20 +35,20 @@ export const SignUp = () => {
                                 <div className="flex-1">
                                     <Input
                                         {...field}
-                                        required
+                                        required                                        
                                         type="text"
                                         icon={<FaAddressCard />}
                                         label={strings.PAGE_SIGNUP_RUCDNI}
                                         placeholder="Ej: 1234567890"
                                         errorMessage={fieldState.error?.message || error}
-                                        disabled={razonSocial ? true : false}
+                                        disabled={razonSocial || isSearching ? true : false}
                                     />
                                 </div>
                                 <button
                                     type="button"
                                     onClick={() => razonSocial ? handlerClearDocument() : handleSearching(field.value)}
                                     className={clsx(
-                                        fieldState.error?.message || error ? "mb-7" : "mb-1",
+                                        fieldState.error?.message || error ? "mb-12" : "mb-1",
                                         razonSocial ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700",
                                         "p-2 text-white rounded-lg h-12.5 w-12.5 flex items-center justify-center  transition-colors disabled:bg-gray-400")}
                                     disabled={isSearching}
@@ -77,7 +77,6 @@ export const SignUp = () => {
                     />
                 )}
             />
-
             <Controller
                 name="nombre_contacto"
                 control={control}
@@ -85,6 +84,7 @@ export const SignUp = () => {
                     <Input
                         {...field}
                         required
+                        disabled={!razonSocial ? true : false}
                         type="text"
                         icon={<FaUser />}
                         label={strings.PAGE_SIGNUP_NOMBRE_CONTACTO}
@@ -101,6 +101,7 @@ export const SignUp = () => {
                     <Input
                         {...field}
                         required
+                        disabled={!razonSocial ? true : false}
                         type="email"
                         icon={<FaEnvelope />}
                         label={strings.PAGE_SIGNUP_CORREO}
@@ -117,6 +118,7 @@ export const SignUp = () => {
                     <Input
                         {...field}
                         required
+                        disabled={!razonSocial ? true : false}
                         type="text"
                         icon={<FaPhone />}
                         label={strings.PAGE_SIGNUP_NUMERO_TELEFONO}
@@ -134,6 +136,7 @@ export const SignUp = () => {
                     <Input
                         {...field}
                         required
+                        disabled={!razonSocial ? true : false}
                         type="email"
                         icon={<FaUser />}
                         label={strings.PAGE_SIGNUP_NOMBRE_USUARIO}
@@ -150,6 +153,7 @@ export const SignUp = () => {
                     <Input
                         {...field}
                         required
+                        disabled={!razonSocial ? true : false}
                         type="password"
                         icon={<FaLock />}
                         label={strings.PAGE_SIGNUP_CONTRASENA}
@@ -166,6 +170,7 @@ export const SignUp = () => {
                     <Input
                         {...field}
                         required
+                        disabled={!razonSocial ? true : false}
                         type="password"
                         icon={<FaLock />}
                         label={strings.PAGE_SIGNUP_CONFIRMAR_CONTRASENA}
@@ -175,9 +180,7 @@ export const SignUp = () => {
                 )}
             />
             {
-                isLoading
-                    ? <Loading />
-                    : <ButtonForm disabled={isLoading} bgColor='secondary' type="submit">{strings.PAGE_SIGNUP_BTN_REGISTRAR}</ButtonForm>
+                razonSocial && <ButtonForm disabled={isLoading} bgColor='secondary' type="submit">{strings.PAGE_SIGNUP_BTN_REGISTRAR}</ButtonForm>
             }
         </form>
     </Layout>

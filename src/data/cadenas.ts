@@ -40,13 +40,17 @@ const Cadenas = {
         PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_PRECIO_OFERTADO: "Ingrese Precio Ofertado",
         PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_BTN_GUARDAR: "GUARDAR",
         PAGE_PRODUCTLISTCLOSED_TITULO: "MIS OFERTAS",
+        PAGE_FORGOTPASSWORD_PLACEHOLDER_CORREO: "Correo Electronico",
+        PAGE_FORGOTPASSWORD_PLACEHOLDER_CLAVE: "Contraseña nueva",
+        PAGE_FORGOTPASSWORD_PLACEHOLDER_CONFIRMAR: "Confirmar contraseña",
+
         PAGE_FORGOTPASSWORD_INGRESE_CORREO: "Ingrese su correo registrado",
-        PAGE_FORGOTPASSWORD_INGRESE_CORREO_DESCRIPCION : "Recibirás un código de verificación en tu correo electrónico.",
+        PAGE_FORGOTPASSWORD_INGRESE_CORREO_DESCRIPCION: "Recibirás un código de verificación en tu correo electrónico.",
         PAGE_FORGOTPASSWORD_VALIDAR_CODIGO: "Ingresa el código enviado a tu correo",
-        PAGE_FORGOTPASSWORD_VALIDAR_CODIGO_DESCRIPCION : "Si no lo recibes, verifica tu bandeja de spam. Tener en cuenta que el código tiene 15 minutos de validez. Si expira, solicita uno nuevo.",
+        PAGE_FORGOTPASSWORD_VALIDAR_CODIGO_DESCRIPCION: "Si no lo recibes, verifica tu bandeja de spam. Tener en cuenta que el código tiene 15 minutos de validez. Si expira, solicita uno nuevo.",
         PAGE_FORFOTPASSWORD_CAMBIAR_CLAVE: "Introduce tu nueva clave y confírmala",
         PAGE_FORFOTPASSWORD_CAMBIAR_CLAVE_DESCRIPCION: "Crea una nueva contraseña para tu cuenta.",
-        PAGE_FORGFOTPASSWORD_RESEND_CODE : "Reenviar código al correo nuevamente",
+        PAGE_FORGFOTPASSWORD_RESEND_CODE: "Reenviar correo nuevamente",
 
         PAGE_FORGOTPASSWORD_CORREO: "Correo",
         PAGE_FORGOTPASSWORD_BTN_ENVIAR_CORREO: "ENVIAR CORREO",
@@ -175,16 +179,18 @@ const Cadenas = {
         PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_PRECIO_OFERTADO: "Enter Offered price",
         PAGE_PRODUCTLIST_MODALPRECIO_INGRESE_BTN_GUARDAR: "SAVE",
         PAGE_PRODUCTLISTCLOSED_TITULO: "MY BIDDINGS",
-
+        PAGE_FORGOTPASSWORD_PLACEHOLDER_CORREO: "Email Address",
+        PAGE_FORGOTPASSWORD_PLACEHOLDER_CLAVE: "New Password",
+        PAGE_FORGOTPASSWORD_PLACEHOLDER_CONFIRMAR: "Confirm Password",
 
 
         PAGE_FORGOTPASSWORD_INGRESE_CORREO: "Enter your registered email address",
         PAGE_FORGOTPASSWORD_INGRESE_CORREO_DESCRIPCION: "You will receive a verification code in your email.",
         PAGE_FORGOTPASSWORD_VALIDAR_CODIGO: "Enter the code sent to your email",
-        PAGE_FORGOTPASSWORD_VALIDAR_CODIGO_DESCRIPCION : "If you don't receive it, check your spam folder. Please note that the code is valid for 15 minutes. If it expires, request a new one.",
+        PAGE_FORGOTPASSWORD_VALIDAR_CODIGO_DESCRIPCION: "If you don't receive it, check your spam folder. Please note that the code is valid for 15 minutes. If it expires, request a new one.",
         PAGE_FORFOTPASSWORD_CAMBIAR_CLAVE: "Enter your new password and confirm it",
         PAGE_FORFOTPASSWORD_CAMBIAR_CLAVE_DESCRIPCION: "Create a new password for your account.",
-        PAGE_FORGFOTPASSWORD_RESEND_CODE : "Resend code to email again",
+        PAGE_FORGFOTPASSWORD_RESEND_CODE: "Resend email again",
 
 
 

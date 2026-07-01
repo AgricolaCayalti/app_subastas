@@ -1,8 +1,8 @@
-/* import {apiRequest} from "@/api/apiRequest.js";
 
-export const consultarDNIRUCService = async (numeroDocumento) => {
-    return apiRequest({
-        url: `consultar-documento/${numeroDocumento}`,
-        method: "GET",
-    });
-}; */
+
+import { httpClient } from "@/api/httpClient";
+
+export const consultarDNIRUCService = async (numeroDocumento: string) => {
+    const { data } = await httpClient.get(`/consultar-documento/${numeroDocumento}`);
+    return data.data;
+};

@@ -1,7 +1,7 @@
 import rutas from "@/data/rutas";
 import { useUI } from "@/hooks";
 import { RegisterForm, RegisterRequest, registerSchema } from "@/schemas/register.schema";
-import { registrarseService } from "@/services/registrarseService";
+import { registrarseService } from "@/services";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

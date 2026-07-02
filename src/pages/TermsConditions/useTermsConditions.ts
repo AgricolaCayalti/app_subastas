@@ -1,5 +1,5 @@
-import { useUI } from "@/hooks";
 import { useState } from "react";
+import { useUI } from "@/hooks";
 
 export const useTermsConditions = () => {
     const [ isChecked, setIsChecked ] = useState(false);

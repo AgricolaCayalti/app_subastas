@@ -37,36 +37,6 @@ export const DialogChangePassword = () => {
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onFormSubmit)}>
                     <div className="space-y-4">
-                        {/* <Controller
-                            name="newPassword"
-                            control={control}
-                            disabled={isLoading}
-
-                            render={({ field }) => (
-                                <div>
-                                    <InputPassword
-                                        {...field}
-                                        label="Nueva contraseña"
-                                    />
-                                    {errors.newPassword && (
-                                        <p className="text-sm text-red-500 mt-1">{errors.newPassword.message}</p>
-                                    )}
-                                </div>
-                            )}
-                        />
-                        <Controller
-                            name="confirmPassword"
-                            control={control}
-                            disabled={isLoading}
-                            render={({ field }) => (
-                                <div>
-                                    <InputPassword {...field} label="Confirmar contraseña" />
-                                    {errors.confirmPassword && (
-                                        <p className="text-sm text-red-500 mt-1">{errors.confirmPassword.message}</p>
-                                    )}
-                                </div>
-                            )}
-                        /> */}
                         <Controller
                             name="newPassword"
                             control={control}

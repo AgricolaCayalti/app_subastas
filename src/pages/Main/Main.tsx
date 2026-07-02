@@ -3,7 +3,7 @@ import Logo from "./../../assets/logo-2.png";
 import { ProfileButton } from "../../components/ProfileButton/ProfileButton";
 import { useMain } from "./useMain";
 import { Loading } from "@/components/Loading/Loading";
-import { Layout } from "@/components/Layout/Layout";
+import { Layout } from "@/components/Layout/Layout"; 
 
 export const Main = () => {
     const { strings, handleGoTo, isLoading } = useMain();
@@ -12,7 +12,7 @@ export const Main = () => {
         <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS" shouldShowBackBtn={false}>
             {isLoading && <Loading />}
             <div className="flex flex-col items-center justify-center space-y-10 my-40">
-                
+
                 <div className="login-box-logo">
                     <img
                         src={Logo}
@@ -38,7 +38,6 @@ export const Main = () => {
                     {strings.PAGE_MAIN_MIS_OFERTAS}
                 </ButtonMain>
             </div>
-            
             <ProfileButton />
         </Layout>
     );

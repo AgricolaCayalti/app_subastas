@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useUI } from '../../hooks';
 import { passwordSchema, type PasswordFormData } from '@/schemas/session.change.password';
-import { httpClient } from '@/api/httpClient';
 import { useAuthChangePasswordStore } from '@/store/useAuthChangePasswordStore';
+import { cambiarClaveService } from '@/services';
 
 export const useDialogChangePassword = () => {
     const { isDialogOpen, setDialogOpen, isLoading, setLoading, setError } = useAuthChangePasswordStore();
@@ -32,7 +32,7 @@ export const useDialogChangePassword = () => {
         setLoading(true);
         setError(null);
         try {
-            await httpClient.post('/sesion/cambiar-clave', { clave: payload.newPassword });
+            await cambiarClaveService(payload);
             alert(strings.PAGE_FORGOTPASSWORD_MSG_PASSWORD_CHANGED);
             setDialogOpen(false);
             reset();

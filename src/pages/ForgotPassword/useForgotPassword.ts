@@ -1,7 +1,9 @@
 import { useNotistack, useUI } from "@/hooks";
-import { cambiarClaveRecuperacionService } from "@/services/cambiarClaveRecuperacionService";
-import { enviarCorreoRecuperacionService } from "@/services/enviarCorreoRecuperacionService";
-import { validarCodigoRecuperacionService } from "@/services/validarCodigoRecuperacionService";
+import { 
+    cambiarClaveRecuperacionService, 
+    enviarCorreoRecuperacionService,
+    validarCodigoRecuperacionService 
+} from "@/services";
 import { useForgotPasswordStore } from "@/store/useForgotPasswordStore";
 import { useNavigate } from "react-router-dom";
 import rutas from "@/data/rutas";

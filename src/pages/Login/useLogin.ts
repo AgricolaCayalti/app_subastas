@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginRequest } from '@/schemas/login.schema';
 import { useAuthStore } from "@/store/useAuthStore";
-import { loginService } from "@/services/loginService";
+import { loginService } from "@/services";
 import { useNotistack } from "@/hooks";
 
 export const useLogin = () => {

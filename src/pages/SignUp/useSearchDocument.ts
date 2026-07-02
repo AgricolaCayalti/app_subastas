@@ -1,6 +1,6 @@
 
 import { RegisterForm } from "@/schemas/register.schema";
-import { consultarDNIRUCService } from "@/services/consultarDNIRUCService";
+import { consultarDNIRUCService } from "@/services";
 import { useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 

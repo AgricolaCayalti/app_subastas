@@ -1,5 +1,5 @@
-import { obtenerSubastasActivas } from "@/services/obtenerSubastasActivas.js";
-import { useNotistack, useUI } from "../../hooks";
+import { obtenerSubastasActivas } from "@/services";
+import { useNotistack, useUI } from "@/hooks";
 import { useProductsOffersStore } from "@/store/useProductsOffersStore";
 import { ProductOffersActive } from "@/components/ProductOffers/types";
 import { useSubastasStore } from "@/store/useSubastasStore";

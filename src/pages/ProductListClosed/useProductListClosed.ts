@@ -1,4 +1,4 @@
-import { obtenerSubastasPasadas } from "@/services/obtenerSubastasPasadas";
+import { obtenerSubastasPasadas } from "@/services";
 import { useNotistack, useUI } from "@/hooks";
 import { useProductsOffersPassedStore } from "@/store/useProductsOffersPassedStore";
 

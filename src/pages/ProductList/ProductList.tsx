@@ -17,7 +17,7 @@ export const ProductList = () => {
     } = useProductList();
 
     return (
-        <Layout title={strings.PAGE_PRODUCTLIST_TITULO} bgColor="primary">
+        <Layout title={strings.PAGE_PRODUCTLIST_TITULO}>
             {isLoading ? (
                 <Loading />
             ) : (

@@ -1,7 +1,7 @@
 
+import { useState } from "react";
 import { RegisterForm } from "@/schemas/register.schema";
 import { consultarDNIRUCService } from "@/services";
-import { useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 
 export const useSearchDocument = (setValue: UseFormSetValue<RegisterForm>) => {

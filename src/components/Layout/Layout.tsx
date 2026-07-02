@@ -9,7 +9,7 @@ interface LayoutProps {
     shouldShowBackBtn?: boolean;
 }
 
-export const Layout = ({ children, title = "", bgColor = "white", ftColor = "primary", shouldShowBackBtn = true }: LayoutProps) => {
+export const Layout = ({ children, title = "", bgColor = "primary", ftColor = "white", shouldShowBackBtn = true }: LayoutProps) => {
     const { strings } = useUI();
     return (
         <div className="flex flex-col justify-center background-gray">

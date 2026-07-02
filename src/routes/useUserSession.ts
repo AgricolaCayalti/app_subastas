@@ -45,14 +45,3 @@ export const useSession = () => {
         };
     }, [verifySession, logout, navigate]);
 };
-
-// al volver de segundo plano, verificar si el usuario está autenticado
-/* const escucharVolverDeSegundoPlano = () => {
-    if (!verifySession()) {
-        navigate('/login');
-    }
-};
-window.addEventListener('resume', escucharVolverDeSegundoPlano);
-return () => {
-    window.removeEventListener('resume', escucharVolverDeSegundoPlano);
-}; */

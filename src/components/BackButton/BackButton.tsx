@@ -1,6 +1,5 @@
-import { FaArrowLeft } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './BackButton.module.css';
 import { useUIStore } from '@/store/useUIStore';
 
 export const BackButton = ({ color = "white" }) => {
@@ -13,8 +12,13 @@ export const BackButton = ({ color = "white" }) => {
         navigate(-1);
     }
 
-
-    return <button onClick={handleBack} className={`${styles.container}`} style={{ color: `var(--${styles[color]})` }}>
-        <FaArrowLeft fontSize={25} />
-    </button>
-}
+    return (
+        <button 
+            onClick={handleBack} 
+            className="border-0 cursor-pointer bg-transparent flex items-center absolute left-3"
+            style={{ color }}
+        >
+            <FaArrowLeft fontSize={25} />
+        </button>
+    );
+};

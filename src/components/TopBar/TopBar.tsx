@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { BackButton } from "../BackButton/BackButton";
 import { ReactNode } from "react";
 
@@ -20,18 +21,16 @@ export const TopBar = ({
 }: TopBarProps) => {
     return (
         <header
-            className={`
-                bg-[var(--${bgColor})]
-                fixed top-0 left-0 w-full z-50
-                h-14 sm:h-16 md:h-[72px]
-                grid grid-cols-3 items-center
-                px-4 sm:px-6
-                border-b 
-                shadow-[0_2px_8px_rgba(0,0,0,0.1)]     
-                
-                
-                ${className}
-            `}
+            className={clsx(
+                'fixed top-0 left-0 w-full z-50',
+                'h-14 sm:h-16 md:h-[72px]',
+                'grid grid-cols-3 items-center',
+                'px-4 sm:px-6',
+                'border-b',
+                'shadow-[0_2px_8px_rgba(0,0,0,0.1)]',
+                className
+            )}
+            style={{ backgroundColor : `var(--${bgColor})` }}
         >
             {/* Columna izquierda: BackButton o espacio vacío */}
             <div className="flex items-center justify-start">
@@ -39,17 +38,17 @@ export const TopBar = ({
                     <BackButton color={ftColor} aria-label="Volver atrás" />
                 )}
             </div>
-{/*   */}
-            {/* Columna central: Título centrado */}
-            <h3 className="
-                            text-base sm:text-lg md:text-xl
-                            font-semibold tracking-wide leading-tight
-                            text-center
-                            line-clamp-2    
-                            break-words
-                            px-2
-                    ">
-                {/* {title} */} {bgColor}
+            <h3 className={
+                clsx(
+                    `text-[var(--${ftColor})]`,
+                    "text-base sm:text-lg md:text-xl",
+                    "font-semibold tracking-wide leading-tight",
+                    "text-center",
+                    "line-clamp-2",
+                    "wrap-break-word",
+                    "px-2"
+                )}>
+                {title}
             </h3>
 
             {/* Columna derecha: slot opcional */}

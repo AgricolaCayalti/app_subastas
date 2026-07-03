@@ -3,7 +3,7 @@ import Logo from "./../../assets/logo-2.png";
 import { ProfileButton } from "../../components/ProfileButton/ProfileButton";
 import { useMain } from "./useMain";
 import { Loading } from "@/components/Loading/Loading";
-import { Layout } from "@/components/Layout/Layout"; 
+import { Layout } from "@/components/Layout/Layout";
 
 export const Main = () => {
     const { strings, handleGoTo, isLoading } = useMain();
@@ -11,16 +11,14 @@ export const Main = () => {
     return (
         <Layout title="SUBASTA AGRÍCOLA CAYALTÍ Y SUBSIDIARIAS" shouldShowBackBtn={false}>
             {isLoading && <Loading />}
-            <div className="flex flex-col items-center justify-center space-y-10 my-40">
-
-                <div className="login-box-logo">
+            <div className="flex flex-col justify-center items-center py-17 space-y-7">
+                <div className="login-box-log">
                     <img
                         src={Logo}
                         alt="Logo"
-                        className="bg-white rounded-full pr-1.5 shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] border-[6px] border-[var(--terciary)]"
+                        className="bg-white rounded-full shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] border-[6px] border-[var(--terciary)]"
                     />
                 </div>
-
                 <ButtonMain
                     fontSize={17.5}
                     bgColor="white"

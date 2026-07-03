@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">com.subastayarabamba.app</string>
-    <string name="title_activity_main">com.subastayarabamba.app</string>
+    <string name="app_name">Subastas Yarabamba</string>
+    <string name="title_activity_main">Subastas Yarabamba</string>
     <string name="package_name">com.subastayarabamba.app</string>
     <string name="custom_url_scheme">com.subastayarabamba.app</string>
 </resources>

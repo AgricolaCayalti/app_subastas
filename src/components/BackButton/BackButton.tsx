@@ -18,7 +18,7 @@ export const BackButton = ({ color = "white" }) => {
             className="border-0 cursor-pointer bg-transparent flex items-center absolute left-3"
             style={{ color }}
         >
-            <FaArrowLeft fontSize={25} />
+            <FaArrowLeft fontSize={16} />
         </button>
     );
 };

@@ -39,31 +39,19 @@ export const useProfileButton = () => {
         return confirmed; // 👈 retorna el booleano
     };
 
-    const plataformError = async () => {
-        if (isNativePlatform) {
-            await Dialog.alert({
-                title: 'Error',
-                message: 'No se pudo cerrar sesión. Intenta de nuevo.',
-            });
-        } else {
-            alert('No se pudo cerrar sesión. Intenta de nuevo.');
-        }
-    }
-
     const onSignOut = async () => {
         const confirmed = await plataformConfirm();
         if (!confirmed) {
             console.log("Usuario canceló el logout");
             return; // 👈 detiene la ejecución
         }
-        console.log("A:", loading)
         setLoading(true);
 
-        console.log("B:", loading)
         try {
             await performLogout();
         } catch (error) {
-            plataformError();
+            logout();
+            navigate('/', { replace: true });
         } finally {
             setLoading(false);
         }

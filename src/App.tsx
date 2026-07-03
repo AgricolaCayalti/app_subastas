@@ -1,10 +1,12 @@
 import { AppRoutes } from './routes/AppRoutes';
-import './App.css'
+import { StatusBarProvider } from './context/StatusBarContext';
 
 function App() {
   return (
-    <AppRoutes />
-  )
+    <StatusBarProvider>
+      <AppRoutes />
+    </StatusBarProvider>
+  );
 }
 
 export default App;

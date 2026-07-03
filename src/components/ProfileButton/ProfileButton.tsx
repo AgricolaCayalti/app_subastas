@@ -15,8 +15,8 @@ export const ProfileButton = () => {
 
     return (
         <React.Fragment>
-            <div className="absolute bottom-[15px] left-0 w-full h-[155px] text-[var(--primary)] flex flex-col justify-between items-center pt-[10px] pb-[10px] text-center">
-                <div className="flex text-[0.95em] gap-[2em]">
+            <div className="absolute bottom-15 left-0 w-full h-[155px] text-[var(--primary)] flex flex-col justify-between items-center text-center">
+                <div className="flex text-[0.95em] gap-[2em] ">
                     <div
                         className="text-[var(--terciary)] flex flex-row gap-[0.5em] items-center justify-end font-light cursor-pointer"
                         onClick={() => setDialogOpen(true)}

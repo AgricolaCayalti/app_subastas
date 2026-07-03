@@ -46,11 +46,13 @@ export const InputForm: React.FC<InputFormProps> = ({
             className={clsx(
                 disabled ? 'bg-gray-200' : 'bg-white',
                 "peer w-full rounded-xl border-2  text-slate-800",
+                "text-base",
                 "transition-all duration-300 ease-out",
                 labelView && "placeholder:text-slate-400 placeholder:opacity-0 focus:placeholder:opacity-100",
                 "hover:border-slate-300",
                 "focus:outline-none",
                 "py-3.5",
+                "shadow-sm",
                 icon ? "pl-12" : "pl-5",
                 isPassword ? "pr-20" : "pr-12",
                 active ? "border-primary-500 ring-2 ring-primary-200 shadow-md shadow-primary-100/50" : "border-slate-200",

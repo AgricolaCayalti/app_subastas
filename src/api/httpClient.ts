@@ -16,7 +16,7 @@ const getBaseURL = () => {
   console.log("📡 Entorno:", import.meta.env.DEV ? "Móvil (dev)" : "Producción", "→ URL:", API_BASE_URL);
   return API_BASE_URL;
 };
-
+console.log(getBaseURL());
 export const httpClient = axios.create({
     baseURL: API_BASE_URL/* getBaseURL() */,
     timeout: API_TIMEOUT,

@@ -5,18 +5,29 @@ export default {
     theme: {
         screens: {
             'short': { 'raw': '(max-height: 740px)' },
-            // ... otros breakpoints si los tienes
         },
         extend: {
             colors: {
-                primary: '#tu-color-primary',
-                terciary: '#tu-color-terciary',
-                // white y gray ya vienen en Tailwind por defecto
+                /* primary: '#183A21',      // Tu color primario
+                terciary: '#BF5708',    // Tu color terciario
+                // El resto de colores ya están en Tailwind por defecto
+                // Pero puedes agregar los tuyos si quieres:
+                secondary: '#018737',
+                gray: '#757575',
+                lighgray: '#E6E6E6',
+                extra: '#624012',
+                semiblack: '#2A2D3A',
+                error: '#ff0000',
+                lighterror: '#ffc8c8', */
             },
             backgroundImage: {
-                'login-bg': "url('/background-login.png')",
+                /* 'login-bg': "url('/background-login.png')",
+                'main-bg': "url('/background-main.png')",
+                'modal-bg': "url('/background-option2.png')", */
             },
         },
     },
-    plugins: [],
+    plugins: [
+        require('tailwindcss-safe-area'), // <-- Añade esta línea
+    ],
 }

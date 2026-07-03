@@ -5,12 +5,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginRequest } from '@/schemas/login.schema';
 import { useAuthStore } from "@/store/useAuthStore";
 import { loginService } from "@/services";
-import { useNotistack } from "@/hooks";
+import { useKeyboard, useNotistack, useUI } from "@/hooks";
+ import { useCapacitorJS } from "@/hooks/useCapacitorJS";
 
 export const useLogin = () => {
+    const { strings, language, onSetLanguage, languages } = useUI();
     const { showNotyError } = useNotistack();
     const navigate = useNavigate();
     const { login, setLoading, isLoading: loadingLogin } = useAuthStore();
+    useCapacitorJS('/');
 
     const {
         control,
@@ -37,12 +40,31 @@ export const useLogin = () => {
         }
     }
 
+    /* useKeyboard(
+        (height) => {
+            const form = document.querySelector('form');
+            if (form) {
+                form.style.paddingBottom = `${height + 16}px`;
+            }
+        },
+        () => {
+            const form = document.querySelector('form');
+            if (form) {
+                form.style.removeProperty('padding-bottom');
+            }
+        }
+    ); */
+
     return {
+        handleSubmit,
         handleLogin,
         handleGoForgotPassword,
         handleGoSignUp,
         loadingLogin,
-        handleSubmit,
-        control
+        control,
+        strings,
+        language,
+        onSetLanguage,
+        languages
     };
 };

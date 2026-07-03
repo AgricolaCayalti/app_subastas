@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import clsx from "clsx";
 import { BackButton } from "../BackButton/BackButton";
 import { ReactNode } from "react";
+import { useStatusBar } from '@/context/StatusBarContext';
+import { isColorDark } from '@/utils/colorUtils';
 
 interface TopBarProps {
     title: string;
@@ -9,6 +12,7 @@ interface TopBarProps {
     shouldShowBackBtn?: boolean;
     rightSlot?: ReactNode;
     className?: string;
+    statusBarStyle?: 'dark' | 'light';
 }
 
 export const TopBar = ({
@@ -18,30 +22,51 @@ export const TopBar = ({
     shouldShowBackBtn = false,
     rightSlot,
     className = "",
+    statusBarStyle: forcedStyle,
 }: TopBarProps) => {
+    const { setStatusBarStyle } = useStatusBar();
+
+    useEffect(() => {
+        const applyStatusBarStyle = async () => {
+            let style: 'dark' | 'light';
+            if (forcedStyle) {
+                style = forcedStyle;
+            } else {
+                const computedBg = getComputedStyle(document.documentElement)
+                    .getPropertyValue(`--${bgColor}`).trim() || bgColor;
+                style = isColorDark(computedBg) ? 'dark' : 'light';
+            }
+            await setStatusBarStyle(style);
+        };
+        applyStatusBarStyle();
+    }, [bgColor, forcedStyle, setStatusBarStyle]);
+
     return (
         <header
             className={clsx(
-                'fixed top-0 left-0 w-full z-50',
-                'h-14 sm:h-16 md:h-[72px]',
-                'grid grid-cols-3 items-center',
-                'px-4 sm:px-6',
-                'border-b',
+                'fixed top-0 left-0 right-0 z-50', // <-- Asegura posición y z-index
+                'h-25 sm:h-16 md:h-[72px]', // <-- Altura fija (3.5rem) para coincidir con el padding
+                'flex items-center justify-between px-4',
                 'shadow-[0_2px_8px_rgba(0,0,0,0.1)]',
                 className
             )}
-            style={{ backgroundColor : `var(--${bgColor})` }}
+            style={{
+                backgroundColor: `var(--${bgColor})`,
+                paddingTop: 'env(safe-area-inset-top)', // <-- Añade padding superior para notch
+            }}
         >
-            {/* Columna izquierda: BackButton o espacio vacío */}
+            {/* Left column */}
             <div className="flex items-center justify-start">
                 {shouldShowBackBtn && (
                     <BackButton color={ftColor} aria-label="Volver atrás" />
                 )}
             </div>
+
+            {/* Title */}
             <h3 className={
                 clsx(
                     `text-[var(--${ftColor})]`,
-                    "text-base sm:text-lg md:text-xl",
+                    "text-xs sm:text-lg md:text-xl",
                     "font-semibold tracking-wide leading-tight",
                     "text-center",
                     "line-clamp-2",
@@ -51,7 +76,7 @@ export const TopBar = ({
                 {title}
             </h3>
 
-            {/* Columna derecha: slot opcional */}
+            {/* Right slot */}
             <div className="flex items-center justify-end">
                 {rightSlot}
             </div>

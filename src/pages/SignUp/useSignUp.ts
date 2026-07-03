@@ -6,11 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useTermsConditions } from "../TermsConditions/useTermsConditions";
 
 export const useSignUp = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const { strings } = useUI();
+    const { toggleCheck } = useTermsConditions();
+
 
     const {
         control,
@@ -26,6 +29,7 @@ export const useSignUp = () => {
         setIsLoading(true);
         try {
             await registrarseService(payload);
+            toggleCheck();
             navigate(rutas.LOGIN);
         } catch (error: any) {
             /* showNotyError({ error: (error as any).msg }); */

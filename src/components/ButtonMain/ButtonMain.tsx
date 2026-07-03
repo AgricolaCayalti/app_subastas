@@ -43,7 +43,7 @@ export const ButtonMain = ({
             disabled={disabled}
             onClick={onClick}
         >
-            {children}
+            {children} 
         </button>
     );
 };

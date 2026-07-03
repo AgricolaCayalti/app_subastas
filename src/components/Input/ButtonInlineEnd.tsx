@@ -17,8 +17,7 @@ export const ButtonInlineEnd: React.FC<ButtonInlineEndProps> = ({ handleClear, a
         <React.Fragment>
             {
                 !disabled && (
-                    <button
-                        type="button"
+                    <div
                         onClick={handleClear}
                         className={clsx(
                             "absolute",
@@ -39,15 +38,14 @@ export const ButtonInlineEnd: React.FC<ButtonInlineEndProps> = ({ handleClear, a
                             isPassword ? "right-12" : "right-4"
                         )}
                     >
-                        <FaTimes size={13} />
-                    </button>
+                        <FaTimes  />
+                    </div>
                 )
             }
 
 
             {isPassword && (
-                <button
-                    type="button"
+                <div
                     onClick={() => setShowPassword(!showPassword)}
                     className={clsx(
                         "absolute",
@@ -67,8 +65,8 @@ export const ButtonInlineEnd: React.FC<ButtonInlineEndProps> = ({ handleClear, a
                         active ? "text-primary-500 bg-primary-50" : "text-slate-400",
                     )}
                 >
-                    {showPassword ? <FaEyeSlash size={13} /> : <FaEye size={13} />}
-                </button>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
             )}
         </React.Fragment>
     )

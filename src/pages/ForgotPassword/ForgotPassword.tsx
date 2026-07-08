@@ -107,7 +107,7 @@ export const ForgotPassword = () => {
                             type="password"
                             icon={<FaLock />}
                             label={strings.PAGE_SIGNUP_CONTRASENA}
-                            placeholder="*****************"
+                            placeholder=""
                             errorMessage={fieldState.error?.message}
                         />
                     )}
@@ -124,7 +124,7 @@ export const ForgotPassword = () => {
                             type="password"
                             icon={<FaLock />}
                             label={strings.PAGE_SIGNUP_CONFIRMAR_CONTRASENA}
-                            placeholder="*****************"
+                            placeholder=""
                             errorMessage={fieldState.error?.message}
                         />
                     )}

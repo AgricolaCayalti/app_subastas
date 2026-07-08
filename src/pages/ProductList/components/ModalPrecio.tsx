@@ -7,7 +7,6 @@ import { ButtonForm, Input } from '@/components';
 import { useModalPrecio } from '../useModalPrecio';
 import { useUI } from '@/hooks';
 import { useProductList } from '../useProductList';
-import bgImage from '../../../assets/background-option2.png';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { ProductDetails } from '@/components/ProductOffers/types';
 
@@ -100,9 +99,6 @@ export const ModalPrecio = () => {
     };
 
     const fieldId = (id: number) => `precio_ofertado_${id}`;
-
-    
-
     // Control de apertura
     const open = !!seleccionado;
 

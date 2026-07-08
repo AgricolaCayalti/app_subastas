@@ -23,20 +23,17 @@ export const Login = () => {
 
     return (
         // Contenedor principal
-        <div className="relative flex flex-col items-center justify-center h-screen h-[100dvh] w-full background-imglogin text-white px-4 py-6 overflow-y-auto safe-area-padding ">
+        <div className="relative flex flex-col items-center h-screen h-[100dvh] w-full background-imglogin text-white px-4 pt-4 pb-2 overflow-y-auto safe-area-padding justify-between">
             {loadingLogin && <Loading />}
-
-            {/* Switch de idioma - ahora fuera del form */}
-            {/* <div className="relative my-5">
-                <div className="absolute left-15"> */}
+            
+            {/* Switch - siempre arriba */}
+            <div className="w-full flex justify-center shrink-0 my-12">
                 <Switch
                     value={language === languages[0]}
                     onChange={() => onSetLanguage()}
                     options={languages}
                 />
-                {/* </div>
-            </div> */}
-
+            </div>
 
             {/* Formulario */}
             <form
@@ -87,7 +84,7 @@ export const Login = () => {
                                 type="password"
                                 icon={<FaLock />}
                                 label={strings.PAGE_LOGIN_CONTRASENA}
-                                placeholder="Ej: *****************"
+                                placeholder=""
                                 errorMessage={fieldState.error?.message}
                             />
                         )}
@@ -124,7 +121,8 @@ export const Login = () => {
             </form>
 
             {/* Footer con logos - fuera del form */}
-            <div className="flex justify-center pointer-events-none">
+
+            <div className="flex justify-center pointer-events-none shrink-0 my-12">
                 <img
                     src={LogosLogin}
                     alt="Logos"
